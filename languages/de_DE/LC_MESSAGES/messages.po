@@ -1,0 +1,82 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: xw_data_retention 0.9.0\n"
+"PO-Revision-Date: 2026-10-24 00:00+0000\n"
+"Last-Translator: Xanweb GmbH\n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Xanweb Data Retention"
+msgstr "Xanweb Datenaufbewahrung"
+
+msgid "Configurable retention for form submissions and Concrete CMS database logs."
+msgstr "Konfigurierbare Aufbewahrung für Formularantworten und ConcreteCMS-Datenbankprotokolle."
+
+msgid "Data Retention"
+msgstr "Datenaufbewahrung"
+
+msgid "Express Form submissions"
+msgstr "Express-Formularantworten"
+
+msgid "Legacy Form block submissions"
+msgstr "Antworten aus klassischen Formularblöcken"
+
+msgid "Concrete CMS database logs"
+msgstr "ConcreteCMS-Datenbankprotokolle"
+
+msgid "View tasks"
+msgstr "Aufgaben anzeigen"
+
+msgid "Nothing is deleted by default. Choose a retention period for each data type and confirm activation. The task runs daily at 03:10 when the Concrete CMS scheduler is enabled on the server."
+msgstr "Standardmäßig wird nichts gelöscht. Wählen Sie für jede Datenart eine Frist und bestätigen Sie die Aktivierung. Die Aufgabe läuft täglich um 03:10 Uhr, sobald der ConcreteCMS-Scheduler auf dem Server aktiviert ist."
+
+msgid "The Concrete CMS scheduler is currently disabled. Saved retention periods do not run automatically until the scheduler is enabled under Dashboard → System & Settings → Automation."
+msgstr "Der ConcreteCMS-Scheduler ist derzeit deaktiviert. Gespeicherte Fristen starten keine automatische Ausführung. Aktivieren Sie den Scheduler unter Verwaltung → System und Einstellungen → Automatisierung."
+
+msgid "Never delete automatically"
+msgstr "Nie automatisch löschen"
+
+msgid "%d month"
+msgid_plural "%d months"
+msgstr[0] "%d Monat"
+msgstr[1] "%d Monate"
+
+msgid "Currently expired: %d records."
+msgstr "Derzeit abgelaufen: %d Einträge."
+
+msgid "Form submissions are processed in batches until complete or the task time limit is reached. Database logs are processed in batches until complete."
+msgstr "Formularantworten werden blockweise bearbeitet, bis alle abgelaufenen Einträge entfernt sind oder das Zeitlimit der Aufgabe erreicht ist. Datenbankprotokolle werden blockweise bis zum Abschluss bearbeitet."
+
+msgid "I confirm automatic deletion of the selected data types. Deletion cannot be undone."
+msgstr "Ich bestätige die automatische Löschung der ausgewählten Datenarten. Das Löschen kann nicht rückgängig gemacht werden."
+
+msgid "Save settings"
+msgstr "Einstellungen speichern"
+
+msgid "These periods apply only to stored Express Form block submissions, legacy Form block submissions, and optional Concrete CMS database logs. Files in the File Manager, emails, web server logs, and backups are not deleted; they need separate retention rules."
+msgstr "Diese Fristen gelten nur für gespeicherte Antworten von Express-Formularblöcken und klassischen Formularblöcken sowie optional für ConcreteCMS-Datenbankprotokolle. Dateien in der Dateiverwaltung, E-Mails, Webserver-Logs und Sicherungskopien werden nicht entfernt; dafür sind eigene Aufbewahrungsregeln nötig."
+
+msgid "Please explicitly confirm automatic deletion."
+msgstr "Bitte bestätigen Sie die automatische Löschung ausdrücklich."
+
+msgid "Retention periods saved."
+msgstr "Aufbewahrungsfristen gespeichert."
+
+msgid "Invalid retention period for %s."
+msgstr "Ungültige Aufbewahrungsfrist für %s."
+
+msgid "Delete expired form data"
+msgstr "Abgelaufene Formulardaten löschen"
+
+msgid "Applies the retention periods configured in the dashboard to Express and legacy form submissions and, optionally, Concrete CMS database logs."
+msgstr "Wendet die im Dashboard eingestellten Fristen auf Express- und klassische Formularantworten sowie optional auf ConcreteCMS-Datenbankprotokolle an."
+
+msgid "Checking expired records."
+msgstr "Abgelaufene Einträge werden geprüft."
+
+msgid "Data retention: deleted %d Express entries, %d legacy form submissions, and %d database log entries."
+msgstr "Datenaufbewahrung: %d Express-Einträge, %d klassische Formularantworten und %d Datenbankprotokolle gelöscht."

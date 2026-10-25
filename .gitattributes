@@ -1,0 +1,10 @@
+MARKETPLACE.md export-ignore
+.gitignore export-ignore
+.gitattributes export-ignore
+release.py export-ignore
+make_icon.py export-ignore
+icon.svg export-ignore
+tests/ export-ignore
+test/ export-ignore
+work/ export-ignore
+*.log export-ignore

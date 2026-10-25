@@ -8,3 +8,5 @@ tests/ export-ignore
 test/ export-ignore
 work/ export-ignore
 *.log export-ignore
+translations/ export-ignore
+translations/** export-ignore

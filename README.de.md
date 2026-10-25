@@ -28,7 +28,7 @@ Sobald mindestens eine Frist aktiv ist, richtet das Package eine tägliche nativ
 
 Express-Einträge werden nur erfasst, wenn ihre Entität von einem noch vorhandenen Express-Formularblock verwendet wird. Andere Express-Objekte bleiben unberührt. **Hochgeladene Dateien in der Dateiverwaltung werden nicht gelöscht**, weil sie an anderer Stelle verwendet werden können. Zugestellte Benachrichtigungs-E-Mails im Postfach, Webserver-Logs, externe Statistiken und Backups sind nicht erfasst. Im CMS-Datenbankprotokoll gespeicherte Kopien versandter E-Mails werden dagegen mitgelöscht, wenn dafür eine Frist aktiviert ist. Für die übrigen Speicherorte sind eigene Löschregeln nötig. Datenschutzhinweise müssen zu den tatsächlich aktivierten Fristen passen.
 
-Das Package enthält englische Ausgangstexte und deutsche Übersetzungen. Eine Deinstallation entfernt nur die Package-Komponenten, nicht gespeicherte Formularantworten oder Core-Objekte.
+Das Package enthält englische Ausgangstexte. Übersetzungen kommen über translate.concretecms.org oder Verwaltung → System und Einstellungen → Mehrsprachigkeit → Sprachen aktualisieren. Eine Deinstallation entfernt nur die Package-Komponenten, nicht gespeicherte Formularantworten oder Core-Objekte.
 
 ## Support
 

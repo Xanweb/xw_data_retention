@@ -32,7 +32,7 @@ When at least one period is active, the add-on creates a native Concrete CMS sch
 
 The add-on **does not delete uploaded files** from the File Manager. A file referenced by a submission can be reused elsewhere and needs a separate, usage-aware deletion process. Delivered notification emails in mailboxes, web server logs, external analytics and backups are outside its scope. When database-log retention is enabled, it also covers copies of sent emails stored in Concrete's `Logs` table. Express entries are included only while their entity is used by an existing Express Form block. A retention period is a technical setting, not a legal determination; align public privacy notices and external storage policies with the settings actually used.
 
-The package includes English interface text and a German translation. It adds one dashboard page and one native task. Uninstalling the package removes its own components; it does not delete submission records or Concrete core objects.
+The package includes English interface text. Translations are available through translate.concretecms.org or Dashboard → System & Settings → Multilingual → Update Languages. It adds one dashboard page and one native task. Uninstalling the package removes its own components; it does not delete submission records or Concrete core objects.
 
 ## Support
 

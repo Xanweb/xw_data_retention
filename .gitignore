@@ -6,3 +6,7 @@ __pycache__/
 .vscode/
 *.swp
 *~
+
+# Local development utilities
+make_icon.py
+release.py

@@ -1,0 +1,42 @@
+[
+  {
+    "concrete": "9.3.9",
+    "php": "8.2",
+    "upload_checks": 45,
+    "package_diagnostics": 0,
+    "upstream_suite_diagnostics": 3,
+    "upstream_all_commands_diagnostics": 3,
+    "lifecycle": "staged 1.0.0 -> upgrade 1.1.0 -> upload suite -> uninstall -> fresh install 1.1.0 passed",
+    "package_payload": "git archive c320ebb; see package-sha256.json"
+  },
+  {
+    "concrete": "9.3.9",
+    "php": "8.4",
+    "upload_checks": 45,
+    "package_diagnostics": 0,
+    "upstream_suite_diagnostics": 151,
+    "upstream_all_commands_diagnostics": 163,
+    "lifecycle": "staged 1.0.0 -> upgrade 1.1.0 -> upload suite -> uninstall -> fresh install 1.1.0 passed",
+    "package_payload": "git archive c320ebb; see package-sha256.json"
+  },
+  {
+    "concrete": "9.5.7",
+    "php": "8.2",
+    "upload_checks": 45,
+    "package_diagnostics": 0,
+    "upstream_suite_diagnostics": 3,
+    "upstream_all_commands_diagnostics": 3,
+    "lifecycle": "staged 1.0.0 -> upgrade 1.1.0 -> upload suite -> uninstall -> fresh install 1.1.0 passed",
+    "package_payload": "git archive c320ebb; see package-sha256.json"
+  },
+  {
+    "concrete": "9.5.7",
+    "php": "8.4",
+    "upload_checks": 45,
+    "package_diagnostics": 0,
+    "upstream_suite_diagnostics": 10,
+    "upstream_all_commands_diagnostics": 10,
+    "lifecycle": "staged 1.0.0 -> upgrade 1.1.0 -> upload suite -> uninstall -> fresh install 1.1.0 passed",
+    "package_payload": "git archive c320ebb; see package-sha256.json"
+  }
+]

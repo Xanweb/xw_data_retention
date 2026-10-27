@@ -1,0 +1,17 @@
+{
+  "xw_data_retention/CHANGELOG.md": "f364c0105d0822140437e4663e20eec40481edd63e0816331dd735ffd671d5f2",
+  "xw_data_retention/LICENSE.txt": "fcf63d260542407b4fd25802e3c239a7da3f51db6ae43201dc824cb13c573f69",
+  "xw_data_retention/README.de.md": "d7ff7d07b57c226ac15350a65c6355fb781854b395569538f3caa1679d013f68",
+  "xw_data_retention/README.md": "8cb8f6d1ee0363058d7fbca2cde6ae7b142e930a3c7cd67d01f3a4e8eb05362c",
+  "xw_data_retention/composer.json": "1639aa0812bfeff0069062a0fa9387b34b1a12e3f88ac897103591e67893dba4",
+  "xw_data_retention/controller.php": "ffa40592d9e26f5a0424518862dd7c0e8a585d52a2355bf4bda588f87fd5b8fd",
+  "xw_data_retention/controllers/single_page/dashboard/system/automation/data_retention.php": "0d911d9000202c7159798783d6fd27d56cfa14d6f5194bcc61720f0e2820a3fc",
+  "xw_data_retention/icon.png": "8a3a3574b74799f5cc3af80849ed1c8ac27f190e6cdc9a47e97f203018336d23",
+  "xw_data_retention/single_pages/dashboard/system/automation/data_retention.php": "a2cbfbcf8573b08d0d13ddc89b4be7a1bc6416a1f75fc972ba070f23116fdb3f",
+  "xw_data_retention/src/Cleanup.php": "ce89204f5e7d46e294607540ff4dc868ebc298d251ffe9ef6339c57fa50540db",
+  "xw_data_retention/src/DeleteExpiredCommand.php": "956bd7ca934043553a32ff20d67dc5a835dd1964264c44897e9f865b7ac552b5",
+  "xw_data_retention/src/DeleteExpiredCommandHandler.php": "b035c79280edb4bac4678779b7cd205ff71771464bec1552847e22cf05c040e3",
+  "xw_data_retention/src/Policy.php": "39210d9e2ad885a2a1ce54de8b5302bf32bedd85bc573a90622fbb8b4146383f",
+  "xw_data_retention/src/TaskController.php": "1093b15b87c981302403c9d93f9f44ef0f3dddfc6a72735329868885f52c6ed4",
+  "xw_data_retention/src/Uploads.php": "c1e7b74094e3fd874b9bd8ffac4ef4e2436c91d7fb4225757b8c080c15a335bd"
+}

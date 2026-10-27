@@ -1,0 +1,129 @@
+2026-10-27. Concrete 9.5.7, PHP 8.4. E_ALL from process startup.
+$ php c5:exec <repository>/tests/lifecycle.php cleanup
+PASS: Empty test-only private storage locations removed in a fresh Doctrine context
+
+$ php c5:package:uninstall xw_data_retention
+Looking for package 'xw_data_retention'... found (Xanweb Data Retention).
+Checking preconditions... good.
+Uninstalling package... done.
+
+$ php c5:exec <repository>/tests/lifecycle.php uninstalled
+PASS: Uninstall removes only the package and its task
+PASS: Uninstall removes its configuration namespace
+
+$ php c5:package:install --languages=no xw_data_retention
+Looking for package 'xw_data_retention'... found (Xanweb Data Retention).
+Checking preconditions... passed.
+Installing... installed.
+
+$ php c5:exec <repository>/tests/lifecycle.php seed-100
+PASS: Package and native task are installed
+PASS: Baseline is previous main code staged as version 1.0.0
+PASS: Old baseline has no uploaded file option
+
+$ php c5:package:update xw_data_retention
+Looking for package 'xw_data_retention'... found (Xanweb Data Retention).
+Checking preconditions... good.
+Updating from v1.0.0 to v1.1.0... done.
+
+$ php c5:exec <repository>/tests/lifecycle.php upgraded
+PASS: Package and native task are installed
+PASS: Package version is 1.1.0
+PASS: Upgrade preserves all previous retention periods
+PASS: Upgrade initializes uploaded file deletion off with an empty folder
+PASS: Upgrade preserves the existing daily task without duplicates
+PASS: External German catalog parses using the Core gettext library
+
+$ php c5:exec <repository>/tests/uploads.php
+PASS: Root folder is rejected
+PASS: Invalid upload settings are rejected before writing any configuration
+PASS: Invalid upload settings are rejected before writing any configuration
+PASS: Invalid upload settings are rejected before writing any configuration
+PASS: Invalid upload settings are rejected before writing any configuration
+PASS: Invalid upload settings are rejected before writing any configuration
+PASS: Invalid upload settings are rejected before writing any configuration
+PASS: Invalid upload settings are rejected before writing any configuration
+PASS: Invalid upload settings are rejected before writing any configuration
+PASS: Invalid upload settings are rejected before writing any configuration
+PASS: Folder ID is stored and uploaded file deletion remains off
+PASS: A folder ID alone does not enable the schedule
+
+Deprecated: URLify::add_chars(): Implicitly marking parameter $language as nullable is deprecated, the explicit nullable type must be used instead in <core-9.5.7>/vendor/jbroadway/urlify/URLify.php on line 74
+
+Deprecated: voku\helper\ASCII::to_ascii(): Implicitly marking parameter $replace_single_chars_only as nullable is deprecated, the explicit nullable type must be used instead in <core-9.5.7>/vendor/voku/portable-ascii/src/voku/helper/ASCII.php on line 830
+
+Deprecated: League\Flysystem\Filesystem::get(): Implicitly marking parameter $handler as nullable is deprecated, the explicit nullable type must be used instead in <core-9.5.7>/vendor/league/flysystem/src/Filesystem.php on line 363
+
+Deprecated: League\Flysystem\FilesystemInterface::get(): Implicitly marking parameter $handler as nullable is deprecated, the explicit nullable type must be used instead in <core-9.5.7>/vendor/league/flysystem/src/FilesystemInterface.php on line 274
+
+Deprecated: League\Flysystem\Handler::__construct(): Implicitly marking parameter $filesystem as nullable is deprecated, the explicit nullable type must be used instead in <core-9.5.7>/vendor/league/flysystem/src/Handler.php on line 28
+PASS: Changing folder storage does not migrate existing files
+
+Deprecated: League\Flysystem\MountManager::get(): Implicitly marking parameter $handler as nullable is deprecated, the explicit nullable type must be used instead in <core-9.5.7>/vendor/league/flysystem/src/MountManager.php on line 642
+
+Deprecated: League\Flysystem\FileNotFoundException::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in <core-9.5.7>/vendor/league/flysystem/src/FileNotFoundException.php on line 21
+PASS: Moving a form upload into a folder applies its non-public storage location
+PASS: Moved upload physically exists in the private storage directory
+PASS: Disabled preview never offers file deletion
+PASS: Disabled feature deletes an expired entry but preserves its file
+PASS: Fixture contains two real file versions and generated thumbnails
+PASS: A real image block is recorded by the Core usage tracker
+PASS: Preview counts distinct eligible files and excludes shared, foreign, used and nested files
+PASS: Preview warns about direct files with no remaining Express entry
+PASS: Run counts deleted entries and distinct uploaded files
+PASS: Eligible files and files shared only by expired entries are deleted
+PASS: All versions are deleted through the Core file API
+PASS: Physical originals and thumbnails of every version are removed
+PASS: Expired upload outside the authorized folder remains
+PASS: Unlinked and previously retained files are never swept
+PASS: File referenced by a current Express entry remains
+PASS: File referenced by an unrelated Express entity remains
+PASS: File in a child folder remains
+PASS: File with recorded Core page/block usage remains
+PASS: File exception and event veto preserve affected files and allow the next deletion
+PASS: Entries stay deleted and Core veto transactions are closed
+PASS: File errors are recorded on the package Concrete log channel
+PASS: Core event vetoes are logged outside the rolled-back transaction
+PASS: Removed folder produces a warning and a zero file preview
+PASS: Removed folder skips file deletion and continues entry cleanup
+PASS: A deadline reached during file deletion still completes both files of that entry
+PASS: The next entry waits for the next run after the deadline
+PASS: Preview handles more than one batch of real uploads
+
+Deprecated: Creation of dynamic property Concrete\Core\Command\Process\Logger\FileLogger::$filePath is deprecated in <core-9.5.7>/src/Command/Process/Logger/FileLogger.php on line 51
+
+Deprecated: Creation of dynamic property Concrete\Core\Command\Process\Logger\FileLogger::$filePath is deprecated in <core-9.5.7>/src/Command/Process/Logger/FileLogger.php on line 75
+PASS: Dashboard task process completes successfully after 205 entries and files
+
+Deprecated: Creation of dynamic property Concrete\Core\Command\Process\Logger\FileLogger::$filePath is deprecated in <core-9.5.7>/src/Command/Process/Logger/FileLogger.php on line 51
+PASS: Native task log includes the entry and uploaded file totals
+PASS: Task runner objects remain attached to Doctrine
+PASS: All 205 bulk uploads are removed
+PASS: All expired scoped entries are processed across batches
+COMPLETED: 45 upload checks
+
+$ php c5:exec <repository>/tests/lifecycle.php cleanup
+PASS: Empty test-only private storage locations removed in a fresh Doctrine context
+
+$ php c5:package:uninstall xw_data_retention
+Looking for package 'xw_data_retention'... found (Xanweb Data Retention).
+Checking preconditions... good.
+Uninstalling package... done.
+
+$ php c5:exec <repository>/tests/lifecycle.php uninstalled
+PASS: Uninstall removes only the package and its task
+PASS: Uninstall removes its configuration namespace
+
+$ php c5:package:install --languages=no xw_data_retention
+Looking for package 'xw_data_retention'... found (Xanweb Data Retention).
+Checking preconditions... passed.
+Installing... installed.
+
+$ php c5:exec <repository>/tests/lifecycle.php defaults
+PASS: Package and native task are installed
+PASS: Package version is 1.1.0
+PASS: Fresh install leaves all deletion disabled
+PASS: Fresh install creates no deletion schedule
+PASS: External German catalog parses using the Core gettext library
+
+MATRIX RESULT: {"concrete": "9.5.7", "php": "8.4", "upload_checks": 45, "package_diagnostics": 0, "upstream_suite_diagnostics": 10, "upstream_all_commands_diagnostics": 10, "lifecycle": "staged 1.0.0 -> upgrade 1.1.0 -> upload suite -> uninstall -> fresh install 1.1.0 passed", "package_payload": "git archive c320ebb; see package-sha256.json"}

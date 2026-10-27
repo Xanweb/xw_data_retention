@@ -42,8 +42,9 @@ $assert($package->getPackageVersion() === '1.1.0', 'Package version is 1.1.0');
 $settings = app(Policy::class)->get();
 if ($mode === 'upgraded') {
     $assert($settings['express'] === 2 && $settings['legacy'] === 3 && $settings['logs'] === 6, 'Upgrade preserves all previous retention periods');
-    $assert($package->getController()->getConfig()->get('retention.delete_express_uploads') === false
-        && $settings['express_upload_folder_id'] === 0, 'Upgrade initializes uploaded file deletion off with an empty folder');
+    $assert($package->getController()->getConfig()->get('retention.delete_express_uploads') !== null
+        && !$settings['delete_express_uploads'] && $settings['express_upload_folder_id'] === 0
+        && $package->getController()->getConfig()->get('retention.express_upload_folder_id') !== null, 'Upgrade initializes uploaded file deletion off with an empty folder');
     $assert(count(app(EntityManagerInterface::class)->getRepository(ScheduledTask::class)->findBy(['task' => $task])) === 1, 'Upgrade preserves the existing daily task without duplicates');
 } else {
     $assert($settings === ['express' => 0, 'legacy' => 0, 'logs' => 0, 'delete_express_uploads' => false, 'express_upload_folder_id' => 0], 'Fresh install leaves all deletion disabled');

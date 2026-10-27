@@ -198,10 +198,15 @@ $assert(strpos(implode('\n', $logger->readAsArray()), 'deleted 30 versions and p
 $assert(count($ids($batchA)) === 10 && count($ids($batchB)) === 10, 'Both native batch jobs retain the configured version count');
 
 // Core's editor VersionList and each remaining block must still resolve after cleanup.
-foreach ([$off, $oldApproved, $small, $aged, $scheduled, $pending, $en, $de, $failure, $large, $batchA, $batchB] as $page) {
+foreach ([$off, $oldApproved, $changing, $aged, $scheduled, $pending, $en, $de, $failure, $large, $batchA, $batchB] as $page) {
     $page = Page::getByID($page->getCollectionID(), 'ACTIVE');
     $versions = (new VersionList($page))->get(100, 0);
     $assert(count($versions) === count($ids($page)), 'Editor version list loads every retained version');
+    Concrete\Core\Http\Request::getInstance()->setCurrentPage($page);
+    $frontendView = $page->getPageController()->getViewObject();
+    $frontendView->setViewTheme($page->getCollectionThemeObject());
+    ob_start(); $renderedPage = (string) $frontendView->render() . ob_get_clean();
+    $assert(strpos($renderedPage, 'Shared retained content') !== false, 'Full frontend page renders retained content after cleanup');
     foreach ($versions as $version) {
         $loaded = Page::getByID($page->getCollectionID(), $version->getVersionID());
         foreach ($loaded->getBlocks('Main') as $block) { ob_start(); $block->display(); $html = ob_get_clean(); if (strpos($html, 'Shared retained content') === false) { throw new RuntimeException('Retained shared block failed to render'); } }

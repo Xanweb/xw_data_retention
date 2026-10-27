@@ -1,0 +1,151 @@
+2026-10-27; Concrete 9.5.7; PHP 8.2; E_ALL from startup.
+$ php c5:package:uninstall xw_data_retention
+Looking for package 'xw_data_retention'... found (Xanweb Data Retention).
+Checking preconditions... good.
+Uninstalling package... done.
+
+$ php c5:package:install --languages=no xw_data_retention
+Looking for package 'xw_data_retention'... found (Xanweb Data Retention).
+Checking preconditions... passed.
+Installing... installed.
+
+$ php c5:exec <repository>/tests/lifecycle.php seed
+PASS: Package version remains unchanged at main version 0.9.0
+PASS: Original main baseline has no page-version task
+
+$ php c5:package:update --force xw_data_retention
+Looking for package 'xw_data_retention'... found (Xanweb Data Retention).
+Checking preconditions... good.
+Forcing upgrade at v0.9.0... done.
+
+$ php c5:exec <repository>/tests/lifecycle.php upgraded
+PASS: Package version remains unchanged at main version 0.9.0
+PASS: Both independent package tasks are installed
+PASS: Owned run-counter table exists
+PASS: Page version defaults are disabled with keep=10, no age limit and no stacks
+PASS: Disabled feature creates no page-version schedule
+PASS: Same-version forced upgrade preserves original retention periods
+PASS: External German catalog parses and contains the new translated section
+
+$ php c5:exec <repository>/tests/page_versions.php
+PASS: Fresh installation disables page version cleanup and stacks
+PASS: Invalid keep count is rejected before configuration changes
+PASS: Invalid keep count is rejected before configuration changes
+PASS: Invalid keep count is rejected before configuration changes
+PASS: Invalid keep count is rejected before configuration changes
+PASS: Invalid keep count is rejected before configuration changes
+PASS: Invalid keep count is rejected before configuration changes
+PASS: Invalid keep count is rejected before configuration changes
+PASS: Activation requires the existing explicit deletion confirmation
+PASS: Maximum keep count is accepted
+PASS: Disabled feature preserves all versions and reports zero candidates
+PASS: Page version settings do not change form or log retention
+PASS: Own daily schedule runs at 03:40
+PASS: Saving again does not duplicate the schedule
+PASS: Preview performs a single SQL count without hydrating version objects
+PASS: SQL preview counts versions and distinct affected pages
+PASS: 25 versions with no age limit retain exactly the latest 10
+PASS: Older approved version survives above the 10-version minimum
+PASS: Page with fewer than N versions remains unchanged
+PASS: Age limit combines with latest-N protection using version creation date
+PASS: Future publication date protects even an older unapproved version
+PASS: Workflow fixture uses a real serialized Core approval request
+PASS: Open workflow conservatively protects the entire page
+PASS: Completed workflow no longer prevents cleanup; approved version remains
+PASS: Stacks and global areas have real version histories
+PASS: Stacks and global areas are excluded by default
+PASS: Explicit stack option applies the same rules to stacks and global areas
+PASS: Trash page remains unchanged even when stacks are enabled
+PASS: Composer draft remains unchanged
+PASS: Dashboard/system page remains unchanged
+PASS: Language pages are counted and processed independently
+PASS: Second language independently retains its newest 10
+PASS: A version event error does not interrupt later versions; counts reflect actual deletion
+PASS: Version failure is logged on the package channel
+PASS: Workflow opened during cleanup protects all remaining versions immediately
+PASS: 225-version page crosses multiple 100-ID chunks without skipping versions
+PASS: Version cleanup memory growth stays below 32 MiB for the multi-chunk fixture
+PASS: Scoped request-cache state is restored after direct cleanup
+PASS: Scheduled Core cleanup task triggers the conflict warning
+PASS: Warning disappears when Core task has no schedule
+PASS: Prior fixtures leave no unprocessed eligible versions before the batch test
+PASS: Native batch runner queues one command per affected page
+PASS: Batch contains exactly one command for each of the two affected pages
+
+Deprecated: Creation of dynamic property Concrete\Core\Command\Process\Logger\FileLogger::$filePath is deprecated in <core-9.5.7>/src/Command/Process/Logger/FileLogger.php on line 51
+
+Deprecated: Creation of dynamic property Concrete\Core\Command\Process\Logger\FileLogger::$filePath is deprecated in <core-9.5.7>/src/Command/Process/Logger/FileLogger.php on line 75
+
+Deprecated: Creation of dynamic property Concrete\Core\Command\Process\Logger\FileLogger::$filePath is deprecated in <core-9.5.7>/src/Command/Process/Logger/FileLogger.php on line 75
+
+Deprecated: Creation of dynamic property Concrete\Core\Command\Process\Logger\FileLogger::$filePath is deprecated in <core-9.5.7>/src/Command/Process/Logger/FileLogger.php on line 51
+PASS: Dashboard batch process completes with successful task status
+PASS: Batch process and task remain managed by Doctrine
+PASS: Run counters aggregate deleted versions and processed pages
+
+Deprecated: Creation of dynamic property Concrete\Core\Command\Process\Logger\FileLogger::$filePath is deprecated in <core-9.5.7>/src/Command/Process/Logger/FileLogger.php on line 51
+PASS: Final native task log contains the per-run totals
+PASS: Both native batch jobs retain the configured version count
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Shared blocks remain attached to all 10 retained versions
+PASS: Disabling cleanup removes only its own schedule
+
+Deprecated: Creation of dynamic property Concrete\Core\Command\Process\Logger\FileLogger::$filePath is deprecated in <core-9.5.7>/src/Command/Process/Logger/FileLogger.php on line 51
+
+Deprecated: Creation of dynamic property Concrete\Core\Command\Process\Logger\FileLogger::$filePath is deprecated in <core-9.5.7>/src/Command/Process/Logger/FileLogger.php on line 51
+PASS: Manual native task while disabled completes with zero deletions
+PASS: Original form/log task schedule stays unchanged
+COMPLETED: 76 page version checks
+
+$ php c5:exec <repository>/tests/lifecycle.php prepare-uninstall
+PASS: Package version remains unchanged at main version 0.9.0
+
+$ php c5:package:uninstall xw_data_retention
+Looking for package 'xw_data_retention'... found (Xanweb Data Retention).
+Checking preconditions... good.
+Uninstalling package... done.
+
+$ php c5:exec <repository>/tests/lifecycle.php uninstalled
+PASS: Both package tasks are removed on uninstall
+PASS: No package configuration remains
+PASS: Package run-counter table is removed
+PASS: Uninstall preserves versions outside the package-owned dashboard page
+PASS: Uninstall leaves unrelated configuration unchanged
+
+$ php c5:package:install --languages=no xw_data_retention
+Looking for package 'xw_data_retention'... found (Xanweb Data Retention).
+Checking preconditions... passed.
+Installing... installed.
+
+$ php c5:exec <repository>/tests/lifecycle.php installed
+PASS: Package version remains unchanged at main version 0.9.0
+PASS: Both independent package tasks are installed
+PASS: Owned run-counter table exists
+PASS: Page version defaults are disabled with keep=10, no age limit and no stacks
+PASS: Disabled feature creates no page-version schedule
+PASS: External German catalog parses and contains the new translated section
+
+MATRIX RESULT: {"concrete": "9.5.7", "php": "8.2", "page_version_checks": 76, "package_diagnostics": 0, "upstream_suite_diagnostics": 7, "upstream_all_commands_diagnostics": 7, "lifecycle": "same-version main upgrade, batch suite, uninstall, fresh install passed", "tested_implementation_commit": "52b29faa2d6e06e24ea24b10b899726063b0ce68"}

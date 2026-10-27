@@ -1,0 +1,447 @@
+2026-10-27; Concrete 9.3.9; PHP 8.4; E_ALL from startup.
+$ php c5:package:uninstall xw_data_retention
+
+Deprecated: Constant E_STRICT is deprecated in <core-9.3.9>/bootstrap/configure.php on line 365
+Looking for package 'xw_data_retention'... found (Xanweb Data Retention).
+Checking preconditions... good.
+Uninstalling package... done.
+
+$ php c5:package:install --languages=no xw_data_retention
+
+Deprecated: Constant E_STRICT is deprecated in <core-9.3.9>/bootstrap/configure.php on line 365
+Looking for package 'xw_data_retention'... found (Xanweb Data Retention).
+Checking preconditions... passed.
+Installing... installed.
+
+$ php c5:exec <repository>/tests/lifecycle.php seed
+
+Deprecated: Constant E_STRICT is deprecated in <core-9.3.9>/bootstrap/configure.php on line 365
+PASS: Package version remains unchanged at main version 0.9.0
+PASS: Original main baseline has no page-version task
+
+$ php c5:package:update --force xw_data_retention
+
+Deprecated: Constant E_STRICT is deprecated in <core-9.3.9>/bootstrap/configure.php on line 365
+Looking for package 'xw_data_retention'... found (Xanweb Data Retention).
+Checking preconditions... good.
+Forcing upgrade at v0.9.0... done.
+
+$ php c5:exec <repository>/tests/lifecycle.php upgraded
+
+Deprecated: Constant E_STRICT is deprecated in <core-9.3.9>/bootstrap/configure.php on line 365
+PASS: Package version remains unchanged at main version 0.9.0
+PASS: Both independent package tasks are installed
+PASS: Owned run-counter table exists
+PASS: Page version defaults are disabled with keep=10, no age limit and no stacks
+PASS: Disabled feature creates no page-version schedule
+PASS: Same-version forced upgrade preserves original retention periods
+PASS: External German catalog parses and contains the new translated section
+
+$ php c5:exec <repository>/tests/page_versions.php
+
+Deprecated: Constant E_STRICT is deprecated in <core-9.3.9>/bootstrap/configure.php on line 365
+
+Deprecated: Concrete\Core\Page\Page::getByPath(): Implicitly marking parameter $tree as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Page.php on line 317
+
+Deprecated: Concrete\Core\Page\Page::getDraftsParentPage(): Implicitly marking parameter $site as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Page.php on line 900
+
+Deprecated: Concrete\Core\Page\Page::setPageType(): Implicitly marking parameter $type as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Page.php on line 2113
+
+Deprecated: Concrete\Core\Page\Page::duplicateAll(): Implicitly marking parameter $site as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Page.php on line 2979
+
+Deprecated: Concrete\Core\Page\Page::duplicate(): Implicitly marking parameter $site as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Page.php on line 2997
+
+Deprecated: Concrete\Core\Page\Page::addHomePage(): Implicitly marking parameter $siteTree as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Page.php on line 3581
+
+Deprecated: Concrete\Core\Page\Page::addStatic(): Implicitly marking parameter $parent as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Page.php on line 3973
+
+Deprecated: Concrete\Core\Page\Page::_duplicateAll(): Implicitly marking parameter $site as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Page.php on line 4154
+
+Deprecated: Concrete\Core\Page\Collection\Collection::rescanDisplayOrderFromBlock(): Implicitly marking parameter $fromDisplay as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Collection/Collection.php on line 1261
+PASS: Fresh installation disables page version cleanup and stacks
+PASS: Invalid keep count is rejected before configuration changes
+PASS: Invalid keep count is rejected before configuration changes
+PASS: Invalid keep count is rejected before configuration changes
+PASS: Invalid keep count is rejected before configuration changes
+PASS: Invalid keep count is rejected before configuration changes
+PASS: Invalid keep count is rejected before configuration changes
+PASS: Invalid keep count is rejected before configuration changes
+PASS: Activation requires the existing explicit deletion confirmation
+PASS: Maximum keep count is accepted
+
+Deprecated: Concrete\Core\Page\Type\Type::getPageTypePageTemplateDefaultPageObject(): Implicitly marking parameter $template as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Type/Type.php on line 288
+
+Deprecated: URLify::add_chars(): Implicitly marking parameter $language as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/jbroadway/urlify/URLify.php on line 74
+
+Deprecated: voku\helper\ASCII::to_ascii(): Implicitly marking parameter $replace_single_chars_only as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/voku/portable-ascii/src/voku/helper/ASCII.php on line 830
+
+Deprecated: Concrete\Core\Page\Theme\Theme::applyToSite(): Implicitly marking parameter $site as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Theme/Theme.php on line 1224
+
+Deprecated: Concrete\Core\Block\Block::setTempFilename(): Implicitly marking parameter $bFilename as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Block/Block.php on line 409
+
+Deprecated: Concrete\Core\Block\Block::alias(): Implicitly marking parameter $displayOrder as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Block/Block.php on line 1924
+
+Deprecated: Concrete\Core\Entity\Statistics\UsageTracker\FileUsageRepository::findBy(): Implicitly marking parameter $orderBy as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Entity/Statistics/UsageTracker/FileUsageRepository.php on line 82
+
+Deprecated: Concrete\Core\Entity\Board\Instance::setSite(): Implicitly marking parameter $site as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Entity/Board/Instance.php on line 162
+
+Deprecated: Concrete\Core\Entity\Board\InstanceItemRepository::findByDataSource(): Implicitly marking parameter $keywords as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Entity/Board/InstanceItemRepository.php on line 29
+
+Deprecated: Concrete\Core\Entity\Express\Entity::getEntityResultsNodeObject(): Implicitly marking parameter $site as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Entity/Express/Entity.php on line 527
+
+Deprecated: Symfony\Component\Serializer\Normalizer\DenormalizableInterface::denormalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/DenormalizableInterface.php on line 37
+
+Deprecated: Concrete\Core\Entity\Permission\IpAccessControlEvent::setSite(): Implicitly marking parameter $value as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Entity/Permission/IpAccessControlEvent.php on line 131
+
+Deprecated: Concrete\Core\Entity\Permission\IpAccessControlCategory::setPackage(): Implicitly marking parameter $value as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Entity/Permission/IpAccessControlCategory.php on line 241
+
+Deprecated: Concrete\Core\Entity\Permission\IpAccessControlRange::setSite(): Implicitly marking parameter $value as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Entity/Permission/IpAccessControlRange.php on line 150
+
+Deprecated: Concrete\Core\Entity\Permission\IpAccessControlRange::setExpiration(): Implicitly marking parameter $value as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Entity/Permission/IpAccessControlRange.php on line 234
+
+Deprecated: Concrete\Core\Entity\Geolocator::create(): Implicitly marking parameter $package as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Entity/Geolocator.php on line 22
+
+Deprecated: Concrete\Core\Entity\Geolocator::setGeolocatorPackage(): Implicitly marking parameter $value as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Entity/Geolocator.php on line 260
+
+Deprecated: Concrete\Core\Multilingual\Page\Section\Section::getIDList(): Implicitly marking parameter $site as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Multilingual/Page/Section/Section.php on line 223
+
+Deprecated: Concrete\Core\Multilingual\Page\Section\Section::getList(): Implicitly marking parameter $site as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Multilingual/Page/Section/Section.php on line 247
+
+Deprecated: Concrete\Core\Multilingual\Page\Section\Section::getByLanguage(): Implicitly marking parameter $site as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Multilingual/Page/Section/Section.php on line 385
+
+Deprecated: Concrete\Core\Multilingual\Page\Section\Section::getByLocale(): Implicitly marking parameter $site as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Multilingual/Page/Section/Section.php on line 413
+
+Deprecated: Concrete\Core\Multilingual\Page\Section\Section::getDefaultSection(): Implicitly marking parameter $site as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Multilingual/Page/Section/Section.php on line 484
+
+Deprecated: Concrete\Core\Multilingual\Page\Section\Section::isDefaultMultilingualSection(): Implicitly marking parameter $site as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Multilingual/Page/Section/Section.php on line 608
+
+Deprecated: Concrete\Core\Url\Resolver\Manager\ResolverManager::__construct(): Implicitly marking parameter $default_resolver as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Url/Resolver/Manager/ResolverManager.php on line 28
+
+Deprecated: League\Url\AbstractUrl::getRelativeUrl(): Implicitly marking parameter $ref_url as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/league/url/src/AbstractUrl.php on line 104
+
+Deprecated: League\Url\UrlInterface::getRelativeUrl(): Implicitly marking parameter $ref_url as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/league/url/src/UrlInterface.php on line 63
+
+Deprecated: Concrete\Core\File\Tracker\UsageTracker::getTrackables(): Implicitly marking parameter $transformer as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/File/Tracker/UsageTracker.php on line 170
+
+Deprecated: Symfony\Component\Messenger\Bridge\Doctrine\Transport\DoctrineSender::__construct(): Implicitly marking parameter $serializer as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/doctrine-messenger/Transport/DoctrineSender.php on line 31
+
+Deprecated: Symfony\Component\Serializer\Encoder\XmlEncoder::buildXml(): Implicitly marking parameter $xmlRootNodeName as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Encoder/XmlEncoder.php on line 362
+
+Deprecated: Symfony\Component\Serializer\Encoder\XmlEncoder::appendNode(): Implicitly marking parameter $key as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Encoder/XmlEncoder.php on line 438
+
+Deprecated: Symfony\Component\Serializer\Encoder\JsonEncoder::__construct(): Implicitly marking parameter $encodingImpl as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Encoder/JsonEncoder.php on line 30
+
+Deprecated: Symfony\Component\Serializer\Encoder\JsonEncoder::__construct(): Implicitly marking parameter $decodingImpl as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Encoder/JsonEncoder.php on line 30
+
+Deprecated: Symfony\Component\Serializer\Normalizer\DateTimeNormalizer::normalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/DateTimeNormalizer.php on line 57
+
+Deprecated: Symfony\Component\Serializer\Normalizer\DateTimeNormalizer::supportsNormalization(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/DateTimeNormalizer.php on line 77
+
+Deprecated: Symfony\Component\Serializer\Normalizer\DateTimeNormalizer::denormalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/DateTimeNormalizer.php on line 89
+
+Deprecated: Symfony\Component\Serializer\Normalizer\DateTimeNormalizer::supportsDenormalization(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/DateTimeNormalizer.php on line 139
+
+Deprecated: Symfony\Component\Serializer\Normalizer\NormalizerInterface::normalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/NormalizerInterface.php on line 39
+
+Deprecated: Symfony\Component\Serializer\Normalizer\NormalizerInterface::supportsNormalization(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/NormalizerInterface.php on line 49
+
+Deprecated: Symfony\Component\Serializer\Normalizer\DenormalizerInterface::denormalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/DenormalizerInterface.php on line 47
+
+Deprecated: Symfony\Component\Serializer\Normalizer\DenormalizerInterface::supportsDenormalization(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/DenormalizerInterface.php on line 58
+
+Deprecated: Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface::supportsNormalization(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/ContextAwareNormalizerInterface.php on line 26
+
+Deprecated: Symfony\Component\Serializer\Normalizer\CustomNormalizer::normalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/CustomNormalizer.php on line 28
+
+Deprecated: Symfony\Component\Serializer\Normalizer\CustomNormalizer::denormalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/CustomNormalizer.php on line 36
+
+Deprecated: Symfony\Component\Serializer\Normalizer\CustomNormalizer::supportsNormalization(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/CustomNormalizer.php on line 52
+
+Deprecated: Symfony\Component\Serializer\Normalizer\CustomNormalizer::supportsDenormalization(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/CustomNormalizer.php on line 66
+
+Deprecated: Symfony\Component\Serializer\Normalizer\ObjectToPopulateTrait::extractObjectToPopulate(): Implicitly marking parameter $key as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/ObjectToPopulateTrait.php on line 24
+
+Deprecated: Symfony\Component\Serializer\Normalizer\ArrayDenormalizer::denormalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/ArrayDenormalizer.php on line 38
+
+Deprecated: Symfony\Component\Serializer\Normalizer\ArrayDenormalizer::supportsDenormalization(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/ArrayDenormalizer.php on line 70
+
+Deprecated: Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface::supportsDenormalization(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/ContextAwareDenormalizerInterface.php on line 26
+
+Deprecated: Symfony\Component\Serializer\Normalizer\ObjectNormalizer::__construct(): Implicitly marking parameter $classMetadataFactory as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/ObjectNormalizer.php on line 37
+
+Deprecated: Symfony\Component\Serializer\Normalizer\ObjectNormalizer::__construct(): Implicitly marking parameter $nameConverter as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/ObjectNormalizer.php on line 37
+
+Deprecated: Symfony\Component\Serializer\Normalizer\ObjectNormalizer::__construct(): Implicitly marking parameter $propertyAccessor as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/ObjectNormalizer.php on line 37
+
+Deprecated: Symfony\Component\Serializer\Normalizer\ObjectNormalizer::__construct(): Implicitly marking parameter $propertyTypeExtractor as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/ObjectNormalizer.php on line 37
+
+Deprecated: Symfony\Component\Serializer\Normalizer\ObjectNormalizer::__construct(): Implicitly marking parameter $classDiscriminatorResolver as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/ObjectNormalizer.php on line 37
+
+Deprecated: Symfony\Component\Serializer\Normalizer\ObjectNormalizer::__construct(): Implicitly marking parameter $objectClassResolver as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/ObjectNormalizer.php on line 37
+
+Deprecated: Symfony\Component\Serializer\Normalizer\ObjectNormalizer::extractAttributes(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/ObjectNormalizer.php on line 63
+
+Deprecated: Symfony\Component\Serializer\Normalizer\ObjectNormalizer::getAttributeValue(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/ObjectNormalizer.php on line 129
+
+Deprecated: Symfony\Component\Serializer\Normalizer\ObjectNormalizer::setAttributeValue(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/ObjectNormalizer.php on line 146
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer::__construct(): Implicitly marking parameter $classMetadataFactory as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractObjectNormalizer.php on line 117
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer::__construct(): Implicitly marking parameter $nameConverter as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractObjectNormalizer.php on line 117
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer::__construct(): Implicitly marking parameter $propertyTypeExtractor as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractObjectNormalizer.php on line 117
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer::__construct(): Implicitly marking parameter $classDiscriminatorResolver as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractObjectNormalizer.php on line 117
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer::__construct(): Implicitly marking parameter $objectClassResolver as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractObjectNormalizer.php on line 117
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer::supportsNormalization(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractObjectNormalizer.php on line 139
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer::normalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractObjectNormalizer.php on line 147
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer::instantiateObject(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractObjectNormalizer.php on line 264
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer::extractAttributes(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractObjectNormalizer.php on line 332
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer::getAttributeValue(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractObjectNormalizer.php on line 339
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer::supportsDenormalization(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractObjectNormalizer.php on line 344
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer::denormalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractObjectNormalizer.php on line 352
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer::setAttributeValue(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractObjectNormalizer.php on line 440
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer::denormalizeParameter(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractObjectNormalizer.php on line 635
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractNormalizer::__construct(): Implicitly marking parameter $classMetadataFactory as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractNormalizer.php on line 140
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractNormalizer::__construct(): Implicitly marking parameter $nameConverter as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractNormalizer.php on line 140
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractNormalizer::handleCircularReference(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractNormalizer.php on line 200
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractNormalizer::isAllowedAttribute(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractNormalizer.php on line 272
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractNormalizer::instantiateObject(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractNormalizer.php on line 333
+
+Deprecated: Symfony\Component\Serializer\Normalizer\AbstractNormalizer::denormalizeParameter(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/AbstractNormalizer.php on line 443
+
+Deprecated: Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor::__construct(): Implicitly marking parameter $mutatorPrefixes as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/property-info/Extractor/ReflectionExtractor.php on line 86
+
+Deprecated: Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor::__construct(): Implicitly marking parameter $accessorPrefixes as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/property-info/Extractor/ReflectionExtractor.php on line 86
+
+Deprecated: Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor::__construct(): Implicitly marking parameter $arrayMutatorPrefixes as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/property-info/Extractor/ReflectionExtractor.php on line 86
+
+Deprecated: Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor::__construct(): Implicitly marking parameter $inflector as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/property-info/Extractor/ReflectionExtractor.php on line 86
+
+Deprecated: Symfony\Component\PropertyInfo\Type::__construct(): Implicitly marking parameter $class as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/property-info/Type.php on line 79
+
+Deprecated: Symfony\Component\Serializer\Serializer::normalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Serializer.php on line 157
+
+Deprecated: Symfony\Component\Serializer\Serializer::denormalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Serializer.php on line 201
+
+Deprecated: Symfony\Component\Serializer\Serializer::supportsNormalization(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Serializer.php on line 244
+
+Deprecated: Symfony\Component\Serializer\Serializer::supportsDenormalization(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Serializer.php on line 252
+
+Deprecated: Concrete\Core\Page\Cloner::clonePage(): Implicitly marking parameter $newParentPage as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Cloner.php on line 74
+
+Deprecated: Concrete\Core\Page\Cloner::clonePage(): Implicitly marking parameter $site as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Cloner.php on line 74
+
+Deprecated: Concrete\Core\Page\Cloner::cloneBlock(): Implicitly marking parameter $displayOrder as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Cloner.php on line 349
+
+Deprecated: Concrete\Core\Page\Cloner::copyData(): Implicitly marking parameter $cvIDs as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Cloner.php on line 452
+
+Deprecated: Concrete\Core\Page\Cloner::copyAttributes(): Implicitly marking parameter $cvIDs as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Cloner.php on line 475
+
+Deprecated: Concrete\Core\Page\Cloner::copyPageTypeComposerOutputBlocks(): Implicitly marking parameter $cvIDs as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Cloner.php on line 499
+
+Deprecated: Concrete\Core\Page\Cloner::copyCustomStyles(): Implicitly marking parameter $cvIDs as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Cloner.php on line 510
+
+Deprecated: Concrete\Core\Page\Cloner::copyBlocks(): Implicitly marking parameter $cvIDs as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Cloner.php on line 523
+
+Deprecated: Concrete\Core\Page\Cloner::copyBlocks(): Implicitly marking parameter $bIDs as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Cloner.php on line 523
+
+Deprecated: Concrete\Core\Page\Cloner::copyAreaStyles(): Implicitly marking parameter $cvIDs as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Cloner.php on line 589
+PASS: Disabled feature preserves all versions and reports zero candidates
+
+Deprecated: Concrete\Core\Command\Task\Input\Input::denormalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Task/Input/Input.php on line 62
+PASS: Page version settings do not change form or log retention
+PASS: Own daily schedule runs at 03:40
+PASS: Saving again does not duplicate the schedule
+PASS: Preview performs a single SQL count without hydrating version objects
+PASS: SQL preview counts versions and distinct affected pages
+PASS: 25 versions with no age limit retain exactly the latest 10
+PASS: Older approved version survives above the 10-version minimum
+PASS: Page with fewer than N versions remains unchanged
+PASS: Age limit combines with latest-N protection using version creation date
+PASS: Future publication date protects even an older unapproved version
+
+Deprecated: Concrete\Core\Permission\Key\NotifyInNotificationCenterNotificationKey::validate(): Implicitly marking parameter $subscription as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Permission/Key/NotifyInNotificationCenterNotificationKey.php on line 52
+
+Deprecated: Concrete\Core\Workflow\Workflow::add(): Implicitly marking parameter $pkg as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Workflow/Workflow.php on line 243
+PASS: Workflow fixture uses a real serialized Core approval request
+PASS: Open workflow conservatively protects the entire page
+PASS: Completed workflow no longer prevents cleanup; approved version remains
+
+Deprecated: Concrete\Core\Page\Stack\Stack::getByPath(): Implicitly marking parameter $siteTree as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Stack/Stack.php on line 103
+
+Deprecated: Concrete\Core\Page\Stack\Stack::getByName(): Implicitly marking parameter $site as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Stack/Stack.php on line 136
+
+Deprecated: Concrete\Core\Page\Stack\Stack::addStack(): Implicitly marking parameter $folder as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Page/Stack/Stack.php on line 287
+PASS: Stacks and global areas have real version histories
+PASS: Stacks and global areas are excluded by default
+PASS: Explicit stack option applies the same rules to stacks and global areas
+PASS: Trash page remains unchanged even when stacks are enabled
+PASS: Composer draft remains unchanged
+PASS: Dashboard/system page remains unchanged
+PASS: Language pages are counted and processed independently
+PASS: Second language independently retains its newest 10
+PASS: A version event error does not interrupt later versions; counts reflect actual deletion
+PASS: Version failure is logged on the package channel
+PASS: Workflow opened during cleanup protects all remaining versions immediately
+PASS: 225-version page crosses multiple 100-ID chunks without skipping versions
+PASS: Version cleanup memory growth stays below 32 MiB for the multi-chunk fixture
+PASS: Scoped request-cache state is restored after direct cleanup
+PASS: Scheduled Core cleanup task triggers the conflict warning
+PASS: Warning disappears when Core task has no schedule
+PASS: Prior fixtures leave no unprocessed eligible versions before the batch test
+
+Deprecated: Concrete\Core\Command\Batch\Batch::create(): Implicitly marking parameter $name as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Batch/Batch.php on line 83
+PASS: Native batch runner queues one command per affected page
+PASS: Batch contains exactly one command for each of the two affected pages
+
+Deprecated: Concrete\Core\Command\Process\ProcessUpdater::closeProcess(): Implicitly marking parameter $exitMessage as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Process/ProcessUpdater.php on line 63
+
+Deprecated: Concrete\Core\Command\Process\ProcessFactory::createTaskProcess(): Implicitly marking parameter $input as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Process/ProcessFactory.php on line 53
+
+Deprecated: Concrete\Core\Command\Batch\BatchUpdater::checkBatchProcessForClose(): Implicitly marking parameter $exitMessage as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Batch/BatchUpdater.php on line 40
+
+Deprecated: Concrete\Core\Command\Process\Logger\FileLogger::__construct(): Implicitly marking parameter $directory as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Process/Logger/FileLogger.php on line 35
+
+Deprecated: Concrete\Core\Command\Process\Logger\FileLogger::__construct(): Implicitly marking parameter $process as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Process/Logger/FileLogger.php on line 35
+
+Deprecated: Concrete\Core\Command\Process\Logger\FileLogger::normalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Process/Logger/FileLogger.php on line 61
+
+Deprecated: Concrete\Core\Command\Process\Logger\FileLogger::denormalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Process/Logger/FileLogger.php on line 68
+
+Deprecated: Symfony\Component\Serializer\Normalizer\NormalizableInterface::normalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/serializer/Normalizer/NormalizableInterface.php on line 38
+
+Deprecated: Concrete\Core\Command\Task\Output\AggregateOutput::normalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Task/Output/AggregateOutput.php on line 39
+
+Deprecated: Concrete\Core\Command\Task\Output\AggregateOutput::denormalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Task/Output/AggregateOutput.php on line 48
+
+Deprecated: Concrete\Core\Command\Task\Runner\Context\DashboardContext::dispatchCommand(): Implicitly marking parameter $stamps as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Task/Runner/Context/DashboardContext.php on line 11
+
+Deprecated: Concrete\Core\Command\Task\Runner\Context\ContextInterface::dispatchCommand(): Implicitly marking parameter $stamps as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Task/Runner/Context/ContextInterface.php on line 14
+
+Deprecated: Creation of dynamic property Concrete\Core\Command\Process\Logger\FileLogger::$filePath is deprecated in <core-9.3.9>/src/Command/Process/Logger/FileLogger.php on line 51
+
+Deprecated: Concrete\Core\Command\Batch\Command\HandleBatchMessageCommand::__construct(): Implicitly marking parameter $batchId as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Batch/Command/HandleBatchMessageCommand.php on line 24
+
+Deprecated: Concrete\Core\Command\Batch\Command\HandleBatchMessageCommand::normalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Batch/Command/HandleBatchMessageCommand.php on line 54
+
+Deprecated: Concrete\Core\Command\Batch\Command\HandleBatchMessageCommand::denormalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Batch/Command/HandleBatchMessageCommand.php on line 63
+
+Deprecated: Concrete\Core\Command\Batch\Stamp\BatchStamp::__construct(): Implicitly marking parameter $batchId as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Batch/Stamp/BatchStamp.php on line 18
+
+Deprecated: Concrete\Core\Command\Task\Stamp\OutputStamp::__construct(): Implicitly marking parameter $output as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Task/Stamp/OutputStamp.php on line 24
+
+Deprecated: Concrete\Core\Command\Task\Stamp\OutputStamp::normalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Task/Stamp/OutputStamp.php on line 37
+
+Deprecated: Concrete\Core\Command\Task\Stamp\OutputStamp::denormalize(): Implicitly marking parameter $format as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Command/Task/Stamp/OutputStamp.php on line 45
+
+Deprecated: Symfony\Component\Messenger\Bridge\Doctrine\Transport\DoctrineReceiver::__construct(): Implicitly marking parameter $serializer as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/doctrine-messenger/Transport/DoctrineReceiver.php on line 36
+
+Deprecated: Symfony\Component\Messenger\Bridge\Doctrine\Transport\DoctrineReceiver::all(): Implicitly marking parameter $limit as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/vendor/symfony/doctrine-messenger/Transport/DoctrineReceiver.php on line 110
+
+Deprecated: Concrete\Core\Summary\Data\Field\LinkDataFieldData::__construct(): Implicitly marking parameter $link as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Summary/Data/Field/LinkDataFieldData.php on line 18
+
+Deprecated: Concrete\Core\Summary\Data\Field\DatetimeDataFieldData::__construct(): Implicitly marking parameter $dateTime as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Summary/Data/Field/DatetimeDataFieldData.php on line 16
+
+Deprecated: Concrete\Core\Summary\Data\Field\AuthorDataFieldData::__construct(): Implicitly marking parameter $ui as nullable is deprecated, the explicit nullable type must be used instead in <core-9.3.9>/src/Summary/Data/Field/AuthorDataFieldData.php on line 41
+
+Deprecated: Creation of dynamic property Concrete\Core\Command\Process\Logger\FileLogger::$filePath is deprecated in <core-9.3.9>/src/Command/Process/Logger/FileLogger.php on line 70
+
+Deprecated: Creation of dynamic property Concrete\Core\Command\Process\Logger\FileLogger::$filePath is deprecated in <core-9.3.9>/src/Command/Process/Logger/FileLogger.php on line 70
+
+Deprecated: Creation of dynamic property Concrete\Core\Command\Process\Logger\FileLogger::$filePath is deprecated in <core-9.3.9>/src/Command/Process/Logger/FileLogger.php on line 51
+PASS: Dashboard batch process completes with successful task status
+PASS: Batch process and task remain managed by Doctrine
+PASS: Run counters aggregate deleted versions and processed pages
+
+Deprecated: Creation of dynamic property Concrete\Core\Command\Process\Logger\FileLogger::$filePath is deprecated in <core-9.3.9>/src/Command/Process/Logger/FileLogger.php on line 51
+PASS: Final native task log contains the per-run totals
+PASS: Both native batch jobs retain the configured version count
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Editor version list loads every retained version
+PASS: Full frontend page renders retained content after cleanup
+PASS: Shared blocks remain attached to all 10 retained versions
+PASS: Disabling cleanup removes only its own schedule
+
+Deprecated: Creation of dynamic property Concrete\Core\Command\Process\Logger\FileLogger::$filePath is deprecated in <core-9.3.9>/src/Command/Process/Logger/FileLogger.php on line 51
+
+Deprecated: Creation of dynamic property Concrete\Core\Command\Process\Logger\FileLogger::$filePath is deprecated in <core-9.3.9>/src/Command/Process/Logger/FileLogger.php on line 51
+PASS: Manual native task while disabled completes with zero deletions
+PASS: Original form/log task schedule stays unchanged
+COMPLETED: 76 page version checks
+
+$ php c5:exec <repository>/tests/lifecycle.php prepare-uninstall
+
+Deprecated: Constant E_STRICT is deprecated in <core-9.3.9>/bootstrap/configure.php on line 365
+PASS: Package version remains unchanged at main version 0.9.0
+
+$ php c5:package:uninstall xw_data_retention
+
+Deprecated: Constant E_STRICT is deprecated in <core-9.3.9>/bootstrap/configure.php on line 365
+Looking for package 'xw_data_retention'... found (Xanweb Data Retention).
+Checking preconditions... good.
+Uninstalling package... done.
+
+$ php c5:exec <repository>/tests/lifecycle.php uninstalled
+
+Deprecated: Constant E_STRICT is deprecated in <core-9.3.9>/bootstrap/configure.php on line 365
+PASS: Both package tasks are removed on uninstall
+PASS: No package configuration remains
+PASS: Package run-counter table is removed
+PASS: Uninstall preserves versions outside the package-owned dashboard page
+PASS: Uninstall leaves unrelated configuration unchanged
+
+$ php c5:package:install --languages=no xw_data_retention
+
+Deprecated: Constant E_STRICT is deprecated in <core-9.3.9>/bootstrap/configure.php on line 365
+Looking for package 'xw_data_retention'... found (Xanweb Data Retention).
+Checking preconditions... passed.
+Installing... installed.
+
+$ php c5:exec <repository>/tests/lifecycle.php installed
+
+Deprecated: Constant E_STRICT is deprecated in <core-9.3.9>/bootstrap/configure.php on line 365
+PASS: Package version remains unchanged at main version 0.9.0
+PASS: Both independent package tasks are installed
+PASS: Owned run-counter table exists
+PASS: Page version defaults are disabled with keep=10, no age limit and no stacks
+PASS: Disabled feature creates no page-version schedule
+PASS: External German catalog parses and contains the new translated section
+
+MATRIX RESULT: {"concrete": "9.3.9", "php": "8.4", "page_version_checks": 76, "package_diagnostics": 0, "upstream_suite_diagnostics": 145, "upstream_all_commands_diagnostics": 155, "lifecycle": "same-version main upgrade, batch suite, uninstall, fresh install passed", "tested_implementation_commit": "52b29faa2d6e06e24ea24b10b899726063b0ce68"}

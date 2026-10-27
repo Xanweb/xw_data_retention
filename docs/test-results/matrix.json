@@ -1,0 +1,42 @@
+[
+  {
+    "concrete": "9.3.9",
+    "php": "8.2",
+    "page_version_checks": 76,
+    "package_diagnostics": 0,
+    "upstream_suite_diagnostics": 7,
+    "upstream_all_commands_diagnostics": 7,
+    "lifecycle": "same-version main upgrade, batch suite, uninstall, fresh install passed",
+    "tested_implementation_commit": "52b29faa2d6e06e24ea24b10b899726063b0ce68"
+  },
+  {
+    "concrete": "9.3.9",
+    "php": "8.4",
+    "page_version_checks": 76,
+    "package_diagnostics": 0,
+    "upstream_suite_diagnostics": 145,
+    "upstream_all_commands_diagnostics": 155,
+    "lifecycle": "same-version main upgrade, batch suite, uninstall, fresh install passed",
+    "tested_implementation_commit": "52b29faa2d6e06e24ea24b10b899726063b0ce68"
+  },
+  {
+    "concrete": "9.5.7",
+    "php": "8.2",
+    "page_version_checks": 76,
+    "package_diagnostics": 0,
+    "upstream_suite_diagnostics": 7,
+    "upstream_all_commands_diagnostics": 7,
+    "lifecycle": "same-version main upgrade, batch suite, uninstall, fresh install passed",
+    "tested_implementation_commit": "52b29faa2d6e06e24ea24b10b899726063b0ce68"
+  },
+  {
+    "concrete": "9.5.7",
+    "php": "8.4",
+    "page_version_checks": 76,
+    "package_diagnostics": 0,
+    "upstream_suite_diagnostics": 11,
+    "upstream_all_commands_diagnostics": 11,
+    "lifecycle": "same-version main upgrade, batch suite, uninstall, fresh install passed",
+    "tested_implementation_commit": "52b29faa2d6e06e24ea24b10b899726063b0ce68"
+  }
+]

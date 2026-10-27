@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xw_data_retention 0.9.0\n"
-"PO-Revision-Date: 2026-10-24 00:00+0000\n"
+"PO-Revision-Date: 2026-10-27 00:00+0000\n"
 "Last-Translator: Xanweb GmbH\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -80,3 +80,75 @@ msgstr "Abgelaufene Einträge werden geprüft."
 
 msgid "Data retention: deleted %d Express entries, %d legacy form submissions, and %d database log entries."
 msgstr "Datenaufbewahrung: %d Express-Einträge, %d klassische Formularantworten und %d Datenbankprotokolle gelöscht."
+
+msgid "Additionally delete only versions older than"
+msgstr "Zusätzlich nur Versionen löschen, die älter sind als"
+
+msgid "Also clean up stacks and global areas"
+msgstr "Stacks und Global Areas ebenfalls bereinigen"
+
+msgid "Always retain the newest N versions. Approved versions, future publication schedules and pages with an open workflow are additionally protected. The age limit applies to the version creation date."
+msgstr "Die neuesten N Versionen bleiben immer erhalten. Freigegebene Versionen, künftige Veröffentlichungspläne und Seiten mit offenem Workflow sind zusätzlich geschützt. Für die Altersgrenze zählt das Erstellungsdatum der Version."
+
+msgid "Applies the configured page version count, age and protection rules."
+msgstr "Wendet die eingestellten Anzahl-, Alters- und Schutzregeln für Seitenversionen an."
+
+msgid "Automatic page version cleanup"
+msgstr "Automatische Bereinigung von Seitenversionen"
+
+msgid "Configurable retention for form submissions, page versions and Concrete CMS database logs."
+msgstr "Konfigurierbare Aufbewahrung für Formularantworten, Seitenversionen und ConcreteCMS-Datenbankprotokolle."
+
+msgid "Could not delete version %d of page %d: %s"
+msgstr "Version %d der Seite %d konnte nicht gelöscht werden: %s"
+
+msgid "Currently eligible: %d versions on %d pages."
+msgstr "Derzeit zur Löschung freigegeben: %d Versionen auf %d Seiten."
+
+msgid "Delete old page versions"
+msgstr "Alte Seitenversionen löschen"
+
+msgid "Delete old page versions automatically"
+msgstr "Alte Seitenversionen automatisch löschen"
+
+msgid "Deleted page versions can only be restored from a backup."
+msgstr "Gelöschte Seitenversionen lassen sich nur aus einem Backup wiederherstellen."
+
+msgid "Invalid page version age limit."
+msgstr "Ungültige Altersgrenze für Seitenversionen."
+
+msgid "Invalid page version retention setting."
+msgstr "Ungültige Einstellung zur Aufbewahrung von Seitenversionen."
+
+msgid "Keep between %d and %d page versions."
+msgstr "Behalten Sie zwischen %d und %d Seitenversionen."
+
+msgid "Minimum versions to keep per page"
+msgstr "Mindestens aufzubewahrende Versionen je Seite"
+
+msgid "No age limit"
+msgstr "Keine Altersgrenze"
+
+msgid "Page %d: deleted %d old versions."
+msgstr "Seite %d: %d alte Versionen gelöscht."
+
+msgid "Page version retention beginning..."
+msgstr "Aufbewahrungsprüfung für Seitenversionen beginnt …"
+
+msgid "Page version retention settings saved."
+msgstr "Aufbewahrungseinstellungen für Seitenversionen gespeichert."
+
+msgid "Page version retention: deleted %d versions and processed %d pages."
+msgstr "Aufbewahrung von Seitenversionen: %d Versionen gelöscht und %d Seiten bearbeitet."
+
+msgid "Page versions"
+msgstr "Seitenversionen"
+
+msgid "Save page version settings"
+msgstr "Einstellungen für Seitenversionen speichern"
+
+msgid "The Core task Remove Old Page Versions is scheduled. It independently keeps only the 10 most recent versions, plus its protected versions. Disable its schedule when using this add-on to avoid conflicting retention rules."
+msgstr "Der Core-Task Remove Old Page Versions ist geplant. Er behält unabhängig von dieser Einstellung nur die zehn neuesten sowie seine geschützten Versionen. Deaktivieren Sie seinen Zeitplan, wenn Sie dieses Addon verwenden, damit sich die Aufbewahrungsregeln nicht widersprechen."
+
+msgid "The preview uses saved settings. Pages in the trash, drafts, dashboard and system pages, aliases and page templates are excluded. Stacks and global areas are processed only when explicitly enabled. The separate task runs daily at 03:40 when the scheduler is enabled."
+msgstr "Die Vorschau verwendet die gespeicherten Einstellungen. Papierkorb, Entwürfe, Dashboard- und Systemseiten, Aliase und Seitenvorlagen sind ausgeschlossen. Stacks und Global Areas werden nur nach ausdrücklicher Aktivierung bearbeitet. Die separate Aufgabe läuft bei aktiviertem Scheduler täglich um 03:40 Uhr."

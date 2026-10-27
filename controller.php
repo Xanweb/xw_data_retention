@@ -26,11 +26,15 @@ class Controller extends Package
 
     public function getPackageDescription()
     {
-        return t('Configurable retention for form submissions and Concrete CMS database logs.');
+        return t('Configurable retention for form submissions, page versions and Concrete CMS database logs.');
     }
 
     public function on_start()
     {
+        $this->app->make(TaskManager::class)->extend(\Xw\DataRetention\PageVersions\Policy::TASK_HANDLE, static function ($app) {
+            return $app->make(\Xw\DataRetention\PageVersions\TaskController::class);
+        });
+        $this->app->make('director')->addListener('on_close_process', [$this->app->make(\Xw\DataRetention\PageVersions\RunStore::class), 'completed']);
         $this->app->make(TaskManager::class)->extend(Policy::TASK_HANDLE, static function ($app) {
             return $app->make(TaskController::class);
         });
@@ -47,6 +51,7 @@ class Controller extends Package
         if (!$tasks->getByHandle(Policy::TASK_HANDLE)) {
             $tasks->add(Policy::TASK_HANDLE, $pkg->getPackageEntity());
         }
+        $this->installPageVersionTask($pkg->getPackageEntity());
         $page = SinglePage::add('/dashboard/system/automation/data_retention', $pkg);
         if (!$page || $page->isError()) {
             throw new \RuntimeException('Could not install the data retention dashboard page.');
@@ -55,9 +60,24 @@ class Controller extends Package
         return $pkg;
     }
 
+    private function installPageVersionTask($entity): void
+    {
+        $tasks = $this->app->make(TaskService::class);
+        if (!$tasks->getByHandle(\Xw\DataRetention\PageVersions\Policy::TASK_HANDLE)) {
+            $tasks->add(\Xw\DataRetention\PageVersions\Policy::TASK_HANDLE, $entity);
+        }
+    }
+
+    public function upgrade()
+    {
+        parent::upgrade();
+        $this->installPageVersionTask($this->getPackageEntity());
+    }
+
     public function uninstall()
     {
         parent::uninstall();
+        $this->app->make('database')->connection()->executeStatement('DROP TABLE IF EXISTS XwDataRetentionPageVersionRuns');
         // In Core 9.3.0 and 9.5.7, DatabaseLoader::clearNamespace() builds but
         // does not execute its DELETE query. Remove only this package's rows.
         $this->app->make('database')->connection()->delete('Config', [

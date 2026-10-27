@@ -10,3 +10,7 @@ work/ export-ignore
 *.log export-ignore
 translations/ export-ignore
 translations/** export-ignore
+
+tests/** export-ignore
+docs/ export-ignore
+docs/** export-ignore

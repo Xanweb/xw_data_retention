@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<schema version="0.3">
+    <table name="XwDataRetentionPageVersionRuns">
+        <field name="runID" type="C" size="32"><KEY/></field>
+        <field name="processID" type="C" size="36"/>
+        <field name="versionsDeleted" type="I"><DEFAULT value="0"/><NOTNULL/></field>
+        <field name="pagesProcessed" type="I"><DEFAULT value="0"/><NOTNULL/></field>
+        <field name="createdAt" type="T"><NOTNULL/></field>
+        <field name="completed" type="I1"><DEFAULT value="0"/><NOTNULL/></field>
+        <index name="processID"><col>processID</col></index>
+    </table>
+</schema>

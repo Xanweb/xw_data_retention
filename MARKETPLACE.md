@@ -42,3 +42,9 @@ The code uses Concrete CMS APIs and Doctrine DBAL already supplied by Core. It i
 One scoped uninstall workaround is intentional: `uninstall()` deletes the package’s rows from the `Config` table directly, because `DatabaseLoader::clearNamespace()` in Concrete 9.3.0 and 9.5.7 builds the DELETE query but never executes it. After Core removes the package's own page, task, and schedule, `uninstall()` deletes only `Config` rows whose namespace is `xw_data_retention`. Fresh-install uninstall tests on both versions confirmed that no package configuration remains and submission data is unaffected.
 
 For any revised PRB upload I will increment the third version digit. The first approved release will be 1.0.0.
+
+## Unreleased — Page versions
+
+Add independent page-version retention with a configurable 10–1000 minimum, optional creation-age limit, SQL preview and an explicit confirmation. Always protect approved/latest/future-scheduled versions; conservatively skip pages with open workflows. Stacks/global areas require a separate opt-in. Trash, drafts, system pages, aliases and templates are excluded. A native per-page batch task runs independently at 03:40. Warn about a scheduled Core Remove Old Page Versions task and recommend disabling its schedule. Core APIs preserve shared blocks; per-version errors are logged and per-run totals reported.
+
+Package description for this feature: Configurable retention for form submissions, page versions and Concrete CMS database logs. The package name stays Xanweb Data Retention. No release version is assigned by this branch. Feature matrix: Concrete 9.3.9/9.5.7 with PHP 8.2/8.4; see `docs/verification-page-versions.md` for results and workflow protections.

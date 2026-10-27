@@ -52,7 +52,20 @@ final class Policy
             $value = (int) $config->get('retention.' . $source . '_months');
             $result[$source] = in_array($value, self::MONTHS, true) ? $value : 0;
         }
+        $result['delete_express_uploads'] = (bool) $config->get('retention.delete_express_uploads', false);
+        $result['express_upload_folder_id'] = max(0, (int) $config->get('retention.express_upload_folder_id', 0));
         return $result;
+    }
+
+    /** Initialize only the new options; existing retention periods are untouched. */
+    public function initializeUploads(): void
+    {
+        $config = $this->config();
+        foreach (['delete_express_uploads' => false, 'express_upload_folder_id' => 0] as $key => $default) {
+            if ($config->get('retention.' . $key) === null) {
+                $config->save('retention.' . $key, $default);
+            }
+        }
     }
 
     public function save(array $values): array
@@ -66,10 +79,34 @@ final class Policy
             }
             $validated[$source] = (int) $raw;
         }
+        $enabled = $values['delete_express_uploads'] ?? '0';
+        $folder = $values['express_upload_folder_id'] ?? '0';
+        if (!is_scalar($enabled) || !in_array((string) $enabled, ['0', '1'], true)) {
+            throw new \InvalidArgumentException(t('Invalid uploaded file deletion setting.'));
+        }
+        if (!is_scalar($folder) || !preg_match('/^(0|[1-9][0-9]*)$/D', (string) $folder)
+            || filter_var($folder, FILTER_VALIDATE_INT) === false) {
+            throw new \InvalidArgumentException(t('Invalid upload folder.'));
+        }
+        $enabled = (bool) (int) $enabled;
+        $folder = (int) $folder;
+        if ($enabled && $validated['express'] === 0) {
+            throw new \InvalidArgumentException(t('Choose an Express retention period before enabling uploaded file deletion.'));
+        }
+        if (($enabled || $folder > 0) && !app(Uploads::class)->isAllowedFolder($folder)) {
+            throw new \InvalidArgumentException(t('Choose an existing File Manager folder other than the root folder.'));
+        }
+        if ($enabled && ($values['confirm_uploads'] ?? null) !== '1') {
+            throw new \InvalidArgumentException(t('Please explicitly confirm permanent deletion of uploaded files.'));
+        }
         $config = $this->config();
         foreach ($validated as $source => $months) {
             $config->save('retention.' . $source . '_months', $months);
         }
+        $config->save('retention.delete_express_uploads', $enabled);
+        $config->save('retention.express_upload_folder_id', $folder);
+        $validated['delete_express_uploads'] = $enabled;
+        $validated['express_upload_folder_id'] = $folder;
         $this->syncSchedule($validated);
         return $validated;
     }
@@ -83,7 +120,7 @@ final class Policy
         }
         $em = $this->app->make(EntityManagerInterface::class);
         $scheduled = $em->getRepository(ScheduledTask::class)->findBy(['task' => $task]);
-        if (max($values) > 0) {
+        if (max(array_map(static function ($source) use ($values) { return (int) $values[$source]; }, self::SOURCES)) > 0) {
             if (!$scheduled) {
                 $this->app->make(Scheduler::class)->createScheduledTask($task, new Input(), '10 3 * * *');
             }

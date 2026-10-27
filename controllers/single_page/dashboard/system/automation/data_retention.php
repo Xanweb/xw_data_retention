@@ -17,6 +17,7 @@ class DataRetention extends DashboardPageController
         $this->set('settings', $settings);
         $this->set('choices', Policy::MONTHS);
         $this->set('preview', $this->app->make(Cleanup::class)->preview($settings));
+        $this->requireAsset('core/file-manager');
         $this->set('schedulerEnabled', $this->app->make(Scheduler::class)->isEnabled());
     }
 
@@ -29,8 +30,11 @@ class DataRetention extends DashboardPageController
         foreach (Policy::SOURCES as $source) {
             $values[$source] = $this->request->request->get($source . '_months');
         }
+        $values['delete_express_uploads'] = $this->request->request->get('delete_express_uploads', '0');
+        $values['express_upload_folder_id'] = $this->request->request->get('express_upload_folder_id', '0');
+        $values['confirm_uploads'] = $this->request->request->get('confirm_uploads');
         try {
-            if (max(array_map('intval', $values)) > 0 && !$this->request->request->get('confirm_activation')) {
+            if (max(array_map(static function ($source) use ($values) { return (int) $values[$source]; }, Policy::SOURCES)) > 0 && !$this->request->request->get('confirm_activation')) {
                 throw new \InvalidArgumentException(t('Please explicitly confirm automatic deletion.'));
             }
             $this->app->make(Policy::class)->save($values);

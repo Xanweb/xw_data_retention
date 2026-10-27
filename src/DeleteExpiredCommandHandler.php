@@ -15,7 +15,7 @@ class DeleteExpiredCommandHandler implements OutputAwareInterface
     {
         $count = app(Cleanup::class)->run();
         if ($this->output) {
-            $this->output->write(t('Data retention: deleted %d Express entries, %d legacy form submissions, and %d database log entries.', $count['express'], $count['legacy'], $count['logs']));
+            $this->output->write(t('Data retention: deleted %d Express entries (%d uploaded files), %d legacy form submissions, and %d database log entries.', $count['express'], $count['uploaded_files'], $count['legacy'], $count['logs']));
         }
     }
 }

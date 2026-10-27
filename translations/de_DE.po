@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: xw_data_retention 0.9.0\n"
-"PO-Revision-Date: 2026-10-24 00:00+0000\n"
+"Project-Id-Version: xw_data_retention 1.1.0\n"
+"PO-Revision-Date: 2026-10-27 00:00+0000\n"
 "Last-Translator: Xanweb GmbH\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -80,3 +80,72 @@ msgstr "Abgelaufene Einträge werden geprüft."
 
 msgid "Data retention: deleted %d Express entries, %d legacy form submissions, and %d database log entries."
 msgstr "Datenaufbewahrung: %d Express-Einträge, %d klassische Formularantworten und %d Datenbankprotokolle gelöscht."
+
+msgid "%d files directly in the selected folder are not linked to any Express entry. The folder may also be used elsewhere. These files will not be deleted."
+msgstr "%d Dateien direkt im gewählten Ordner sind mit keinem Express-Eintrag verknüpft. Der Ordner wird möglicherweise auch anderweitig verwendet. Diese Dateien werden nicht gelöscht."
+
+msgid "Also delete uploaded files"
+msgstr "Hochgeladene Dateien ebenfalls löschen"
+
+msgid "Authorized upload folder"
+msgstr "Freigegebener Upload-Ordner"
+
+msgid "Choose a positive Express retention period and a folder other than the File Manager root. Only files directly in this folder that belong to entries being deleted are eligible. Subfolders and files without an Express entry are excluded. Files still linked to another Express entry or recorded as used by a page or block are kept."
+msgstr "Wählen Sie eine Express-Aufbewahrungsfrist größer null und einen Ordner außerhalb des Startordners der Dateiverwaltung. Nur Dateien direkt in diesem Ordner, die zu gerade gelöschten Einträgen gehören, kommen infrage. Unterordner und Dateien ohne Express-Eintrag sind ausgenommen. Dateien mit einer weiteren Express-Verknüpfung oder einer erfassten Seiten- oder Blockverwendung bleiben erhalten."
+
+msgid "Choose an Express retention period before enabling uploaded file deletion."
+msgstr "Wählen Sie eine Express-Aufbewahrungsfrist, bevor Sie die Löschung hochgeladener Dateien aktivieren."
+
+msgid "Choose an existing File Manager folder other than the root folder."
+msgstr "Wählen Sie einen vorhandenen Ordner außerhalb des Startordners der Dateiverwaltung."
+
+msgid "Could not delete uploaded file %d: %s"
+msgstr "Hochgeladene Datei %d konnte nicht gelöscht werden: %s"
+
+msgid "Could not inspect uploaded files for Express entry %d: %s"
+msgstr "Die hochgeladenen Dateien von Express-Eintrag %d konnten nicht geprüft werden: %s"
+
+msgid "Currently eligible uploaded files: %d."
+msgstr "Derzeit zur Löschung freigegebene Uploads: %d."
+
+msgid "Data retention: deleted %d Express entries (%d uploaded files), %d legacy form submissions, and %d database log entries."
+msgstr "Datenaufbewahrung: %d Express-Einträge (%d hochgeladene Dateien), %d klassische Formularantworten und %d Datenbankprotokolle gelöscht."
+
+msgid "Edit the Express Form block, open Options → Files → Add uploaded files to folder, and select this same folder. This does not move earlier uploads."
+msgstr "Bearbeiten Sie den Express-Formularblock und wählen Sie unter Optionen → Dateien → Hochgeladene Dateien einem Ordner hinzufügen denselben Ordner aus. Frühere Uploads werden dadurch nicht verschoben."
+
+msgid "For personal or confidential uploads, configure a non-public storage location under Dashboard → System & Settings → Files → File Storage Locations. Use a local directory outside the web root without a public relative URL. Assign it to the folder using Edit Folder → Storage Location in the File Manager. New form uploads moved into that folder use its storage location. Changing the folder setting does not relocate existing files; change their storage location separately and restrict File Manager download permissions."
+msgstr "Richten Sie für personenbezogene oder vertrauliche Uploads unter Verwaltung → System und Einstellungen → Dateien → Dateispeicherorte einen nicht öffentlichen Speicherort ein. Verwenden Sie ein lokales Verzeichnis außerhalb des Webroots ohne öffentliche relative URL. Weisen Sie ihn in der Dateiverwaltung über Ordner bearbeiten → Speicherort zu. Neue Formular-Uploads übernehmen den Speicherort beim Verschieben in diesen Ordner. Eine Änderung am Ordner verschiebt vorhandene Dateien nicht. Ändern Sie deren Speicherort separat und schränken Sie die Download-Berechtigungen ein."
+
+msgid "I confirm that uploaded files in this folder that belong to expired Express entries will be permanently deleted."
+msgstr "Ich bestätige, dass hochgeladene Dateien in diesem Ordner, die zu abgelaufenen Express-Einträgen gehören, endgültig gelöscht werden."
+
+msgid "Invalid upload folder."
+msgstr "Ungültiger Upload-Ordner."
+
+msgid "Invalid uploaded file deletion setting."
+msgstr "Ungültige Einstellung zur Löschung hochgeladener Dateien."
+
+msgid "Please explicitly confirm permanent deletion of uploaded files."
+msgstr "Bitte bestätigen Sie die endgültige Löschung hochgeladener Dateien ausdrücklich."
+
+msgid "The Core usage tracker covers participating blocks and attributes. Hard-coded file URLs and custom integrations may not be recorded; use a dedicated upload folder and do not reuse its files elsewhere."
+msgstr "Die Core-Verwendungsprüfung erfasst teilnehmende Blöcke und Attribute. Fest eingetragene Datei-URLs und eigene Integrationen werden möglicherweise nicht erfasst. Verwenden Sie einen eigenen Upload-Ordner und nutzen Sie seine Dateien nicht anderweitig."
+
+msgid "The authorized upload folder no longer exists. Uploaded file deletion was skipped; expired entries will still be deleted."
+msgstr "Der freigegebene Upload-Ordner existiert nicht mehr. Die Dateilöschung wurde übersprungen; abgelaufene Einträge werden weiterhin gelöscht."
+
+msgid "The authorized upload folder no longer exists. Uploaded file deletion will be skipped; expired entries will still be deleted."
+msgstr "Der freigegebene Upload-Ordner existiert nicht mehr. Die Dateilöschung wird übersprungen; abgelaufene Einträge werden weiterhin gelöscht."
+
+msgid "The preview uses saved settings and current references. Time limits, deletion events, errors or concurrent changes may reduce the number deleted in the next run."
+msgstr "Die Vorschau verwendet die gespeicherten Einstellungen und aktuellen Verknüpfungen. Zeitlimits, Löschereignisse, Fehler oder gleichzeitige Änderungen können die Zahl der Löschungen im nächsten Lauf verringern."
+
+msgid "These periods apply only to stored Express Form block submissions, legacy Form block submissions, and optional Concrete CMS database logs. File Manager uploads are kept by default; optional deletion applies only to files of expired Express entries directly in the authorized folder, subject to the reference checks above. Delivered emails, web server logs, and backups need separate retention rules."
+msgstr "Diese Fristen gelten nur für gespeicherte Express- und klassische Formularantworten sowie optional für ConcreteCMS-Datenbankprotokolle. Uploads bleiben standardmäßig erhalten. Die optionale Dateilöschung betrifft nur Dateien abgelaufener Express-Einträge direkt im freigegebenen Ordner unter den oben beschriebenen Verknüpfungsprüfungen. Zugestellte E-Mails, Webserver-Logs und Backups benötigen eigene Aufbewahrungsregeln."
+
+msgid "Uploaded file %d was not deleted because a Core event prevented deletion."
+msgstr "Hochgeladene Datei %d wurde nicht gelöscht, weil ein Core-Ereignis die Löschung verhindert hat."
+
+msgid "Uploaded files from Express forms"
+msgstr "Hochgeladene Dateien aus Express-Formularen"

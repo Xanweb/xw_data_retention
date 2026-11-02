@@ -24,7 +24,7 @@ Eine Frist über null muss beim Speichern ausdrücklich bestätigt werden. Die E
 
 Sobald mindestens eine Frist aktiv ist, richtet das Package eine tägliche native ConcreteCMS-Aufgabe für 03:10 Uhr ein. Der ConcreteCMS-Scheduler und sein serverseitiger Auslöser müssen zusätzlich aktiv sein. Ohne sie reicht das Speichern der Frist nicht aus. Die Aufgabe kann auch manuell unter **Aufgaben** gestartet werden. Stehen wieder alle Fristen auf **Nie**, wird die Planung entfernt.
 
-## Optionale Löschung von Express-Uploads (1.1.0)
+## Optionale Löschung von Express-Uploads (0.9.3)
 
 Hochgeladene Dateien bleiben **standardmäßig erhalten**, auch nach einem Upgrade von 1.0.x. Zum Aktivieren eine Express-Frist größer null setzen, einen eigenen Ordner außerhalb des Roots der Dateiverwaltung auswählen, **Also delete uploaded files** einschalten und die zusätzliche Bestätigung zur endgültigen Dateilöschung akzeptieren.
 
@@ -50,3 +50,20 @@ Das Package enthält englische Ausgangstexte. Übersetzungen kommen über transl
 ## Support
 
 Herausgeber: Xanweb GmbH. Support erfolgt über [GitHub-Issues](https://github.com/Xanweb/xw_data_retention/issues). Dieses kostenlose Addon hat keine garantierte Reaktionszeit. Bitte bei einer Fehlermeldung die ConcreteCMS-Version, Package-Version, relevante Aufgabenausgabe und eingestellte Fristen nennen. Keine personenbezogenen Formulardaten mitsenden.
+
+## Seitenversionen (0.9.3)
+
+Der eigene Abschnitt **Page versions** steht standardmäßig auf **Never delete automatically**. Zum Aktivieren mindestens **10 bis höchstens 1000 Versionen je Seite** festlegen und optional eine Altersgrenze von 1, 2, 3, 6, 12, 24 oder 36 Monaten wählen. **No age limit** bedeutet: nur Anzahl- und Schutzregeln anwenden. Beim Speichern muss die automatische Löschung ausdrücklich bestätigt werden. Die Formular-/Log-Fristen und deren Aufgabe um 03:10 bleiben unabhängig davon.
+
+Gelöscht wird nur außerhalb der neuesten N Versionen und, falls ausgewählt, zusätzlich nur bei einem Erstellungsdatum vor der Altersgrenze. Die jüngste und sämtliche freigegebenen Versionen bleiben immer erhalten; dadurch können mehr als N Versionen übrig bleiben. Ein künftiger Veröffentlichungsbeginn schützt auch nicht freigegebene Versionen. Bei einem offenen Workflow wird vorsichtshalber die gesamte Seite übersprungen: Der Core speichert die genaue angefragte Version im serialisierten Workflow-Request. Diese Regel schützt offene Freigaben ohne SQL-Auswertung serialisierter Inhalte.
+
+Stacks und Global Areas bleiben ausgenommen, solange **Also clean up stacks and global areas** nicht aktiviert wird. Danach gelten für jeden Stack dieselben Regeln. Papierkorb, Composer-Entwürfe, Dashboard-/Systemseiten, Aliase und Seitenvorlagen bleiben ausgeschlossen. Jede Sprachseite wird einzeln bewertet. Die SQL-Vorschau zählt Versionen und betroffene Seiten anhand der gespeicherten Einstellungen, ohne Versionsobjekte zu laden. Änderungen bis zum Lauf können die tatsächliche Anzahl verringern.
+
+Die separate native Aufgabe **Delete old page versions** (`xw_delete_old_page_versions`) läuft täglich um **03:40**, wenn der Concrete-Scheduler eingerichtet ist, und lässt sich unter **Tasks** manuell starten. Ausschalten entfernt nur ihren eigenen Zeitplan. Pro betroffener Seite wird ein Batch-Befehl ausgeführt; Versions-IDs werden in Blöcken von 100 gelesen. Die Core-API `Version::delete()` berücksichtigt gemeinsam genutzte Blöcke. Fehler einzelner Versionen landen im Protokollkanal `xw_data_retention`; weitere Versionen werden weiterbearbeitet. Die native Aufgabenausgabe enthält Seitenzähler und die Gesamtsumme je Lauf. Für ein dauerhaftes Dashboard-Protokoll das Core-Prozesslogging aktivieren. Eine eigene Package-Tabelle speichert die Summen; abgeschlossene Zähler älter als 30 Tage werden entfernt. Eine Deinstallation entfernt diese Tabelle, beide Aufgaben, deren Zeitpläne und die Package-Config, ohne eine Bereinigung auszuführen.
+
+**Den Zeitplan des Core-Tasks Remove Old Page Versions deaktivieren, wenn diese Erweiterung verwendet wird.** Der Core-Task hält unabhängig von den Einstellungen nur die neuesten zehn plus seine geschützten Versionen und kennt weder diese Alters-/Anzahlregeln noch den Schutz offener Workflows. Bei geplantem Core-Task erscheint eine Warnung im Dashboard. Beide Aufgaben gleichzeitig können Historie entfernen, die das Addon behalten würde.
+
+Gelöschte Versionen lassen sich nur aus einem Backup wiederherstellen. Vor der Aktivierung Datenbank und Website-Dateien sichern. Veröffentlichte aktuelle Seiteninhalte bleiben erhalten.
+
+
+Für das Upgrade von 0.9.0 die Paketdateien ersetzen und im Dashboard aktualisieren oder `php concrete/bin/concrete c5:package:update xw_data_retention` ausführen. Vorhandene Fristen bleiben erhalten. Beide neuen Löschfunktionen bleiben bis zur ausdrücklichen Aktivierung ausgeschaltet.

@@ -1,20 +1,50 @@
-# Integration tests for 1.1.0
+# Combined release tests — 0.9.3
 
-Run only on disposable Concrete installations named **Xanweb Retention Upload Test**, with database names `xw_retention_110_93` or `xw_retention_110_95`. These guards are deliberate: the tests create and permanently delete real Express entries, files, versions, thumbnails and logs. Never point them at a customer database.
+Use only disposable Concrete sites named **Xanweb Retention Release Test** with
+MySQL databases **xw_retention_release093_93** or **xw_retention_release093_95**.
+The scripts enforce both guards. They create and permanently delete real files,
+Express entries, version histories, stacks, private storage and logs. Never run
+against customer databases. The feature suites also retain their original
+separate upload/page-version test-site guards for development.
 
-The new upload feature is tested on Concrete 9.3.9 and 9.5.7, with PHP 8.2 and 8.4. Tests use Core APIs and libraries; no separate test dependency is required. Supply the test database connection and appropriate PHP binary for each installation.
+Test the exact `git archive` distribution on Concrete 9.3.9 and 9.5.7 with PHP
+8.2 and 8.4. Enable E_ALL at process startup. Acceptance is **no diagnostics from
+the package**; preserve upstream Core/vendor diagnostics separately.
 
-From the test site's root, with the repository outside the site's public directory:
+For each matrix cell:
+
+1. Install original main 0.9.0; run `lifecycle.php seed` to save 2/3/6-month periods.
+2. Replace it with the 0.9.3 archive and run `c5:package:update xw_data_retention`.
+3. Run `lifecycle.php upgraded`; it checks both new hooks and disables the old
+   periods only after verifying that upgrade preserved them.
+4. Run `combined.php`, `uploads.php`, `lifecycle.php cleanup`, then
+   `page_versions.php`. The combined test checks both policy namespaces,
+   independent schedules, Dashboard datasets, real forms and confirmations.
+5. Run `lifecycle.php prepare-uninstall`, uninstall the package, then run
+   `lifecycle.php uninstalled`. This verifies owned tasks, config and table
+   removal while preserving unrelated config and page histories.
+6. Reinstall 0.9.3 and run `lifecycle.php defaults`.
+
+Invoke test scripts from each test site's root using:
 
 ```sh
-php concrete/bin/concrete c5:package:install --languages=no xw_data_retention
-php concrete/bin/concrete c5:exec /path/to/repository/tests/lifecycle.php defaults
-php concrete/bin/concrete c5:exec /path/to/repository/tests/uploads.php
-php concrete/bin/concrete c5:exec /path/to/repository/tests/lifecycle.php cleanup
+/path/to/php concrete/bin/concrete c5:exec /absolute/path/to/repository/tests/combined.php
+/path/to/php concrete/bin/concrete c5:exec /absolute/path/to/repository/tests/uploads.php
+/path/to/php concrete/bin/concrete c5:exec /absolute/path/to/repository/tests/page_versions.php
 ```
 
-For upgrade verification, install a copy of the previous main code with only its `pkgVersion` set to `1.0.0`, run `lifecycle.php seed-100`, replace the package with the 1.1.0 archive, update it through `c5:package:update`, then run `lifecycle.php upgraded`. This explicitly tests the version transition; it does not claim that the repository already contains a released 1.0.0 tag.
+`uploads.php` covers authorization, direct-folder scoping, current/shared/other
+Express references, Core usage tracking, image versions and physical thumbnails,
+private storage, missing folders, event vetoes/errors, transaction cleanup,
+deadlines and a real queued Dashboard process with 205 files. Cleanup of its
+empty private storage locations runs in a fresh process.
 
-`uploads.php` checks validation before config writes, disabled behavior, direct-folder scoping, shared/current/unrelated Express references, deduplication, real Core image-block usage, actual versions and physical thumbnails, private storage per folder, missing folders, error and event-veto continuation, transaction cleanup, deadlines, and a native queued Dashboard process with 205 real files. Only the bulk fixture skips thumbnail generation; the version/thumbnail fixture generates and verifies physical thumbnails. The worker uses Core's Dashboard context, real async transport, event dispatcher and Symfony Worker. It verifies the persisted completed process, exit code, task completion timestamp, process log and still-managed runner objects. Empty fixture storage locations are removed by `lifecycle.php cleanup` in a fresh Doctrine context so stale Core File objects cannot refer to a removed storage entity.
+`page_versions.php` covers count/age rules, approval and schedules, actual open
+workflows, stacks/global areas, excluded pages, languages, invalid settings,
+Core-task warnings, mid-run workflow changes, bounded reads/memory, shared
+blocks, per-version failure continuation and real queued Dashboard tasks. It
+renders affected pages and retained blocks through the Core frontend/editor APIs.
 
-Enable `E_ALL` from PHP startup. Acceptance: **no diagnostics originating from the package**. Keep upstream Core/vendor diagnostics visible and report them separately. Test scripts and translation source are excluded from the archive through `.gitattributes`.
+Development tests, reports and translation source are excluded from distribution
+using `.gitattributes`. Historical branch verification remains in `docs/`;
+`docs/verification-0.9.3.md` describes the combined release.

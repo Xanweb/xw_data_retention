@@ -19,9 +19,8 @@ use Xw\DataRetention\Policy;
 use Xw\DataRetention\Uploads;
 
 $db = app('database')->connection();
-if (app('site')->getDefault()->getSiteName() !== 'Xanweb Retention Upload Test'
-    || !in_array($db->getDatabase(), ['xw_retention_110_93', 'xw_retention_110_95'], true)) {
-    throw new RuntimeException('Use only the isolated Xanweb Retention Upload Test databases.');
+if (!((app('site')->getDefault()->getSiteName() === 'Xanweb Retention Upload Test' && in_array($db->getDatabase(), ['xw_retention_110_93', 'xw_retention_110_95'], true)) || (app('site')->getDefault()->getSiteName() === 'Xanweb Retention Release Test' && in_array($db->getDatabase(), ['xw_retention_release093_93', 'xw_retention_release093_95'], true)))) {
+    throw new RuntimeException('Isolated retention test site and database required.');
 }
 $_SERVER['REQUEST_METHOD'] = 'GET';
 error_reporting(E_ALL);

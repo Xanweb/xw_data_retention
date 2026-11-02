@@ -62,6 +62,7 @@ $labels = \Xw\DataRetention\Policy::labels();
     </div>
     <button class="btn btn-primary" type="submit"><?= t('Save settings') ?></button>
 </form>
+<?php $view->element('page_versions/settings', compact('pageVersionSettings', 'pageVersionPreview', 'coreVersionTaskScheduled', 'view', 'token'), 'xw_data_retention'); ?>
 <p class="form-text"><?= t('Form submissions are processed in batches until complete or the task time limit is reached. Database logs are processed in batches until complete.') ?></p>
 <hr>
 <p><?= t('These periods apply only to stored Express Form block submissions, legacy Form block submissions, and optional Concrete CMS database logs. File Manager uploads are kept by default; optional deletion applies only to files of expired Express entries directly in the authorized folder, subject to the reference checks above. Delivered emails, web server logs, and backups need separate retention rules.') ?></p>

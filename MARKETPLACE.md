@@ -3,7 +3,7 @@
 **Package handle:** `xw_data_retention`
 **First PRB upload:** `0.9.0`
 **Minimum Concrete CMS version:** 9.3.0
-**Upload feature target:** `1.1.0` (feature branch; merge and release pending)
+**Current package version:** `0.9.3`
 **Upload feature tested versions:** 9.3.9 and 9.5.7; original retention also tested on 9.3.0
 **License:** MIT (free add-on)
 
@@ -19,11 +19,11 @@ Xanweb Data Retention adds a dashboard settings page and a native scheduled task
 
 The task runs daily at 03:10 when Concrete's scheduler is enabled, and it can be run manually. Form responses are processed in 200-record batches until finished or the task time limit is reached; the running task's managed objects stay attached while Express entries are deleted. Database logs are deleted in 5,000-record SQL batches until finished. Returning every period to “Never” removes the schedule.
 
-The package keeps File Manager files by default. Version 1.1.0 can delete files linked to an expired Express entry only when directly in the authorized folder; subfolders and unlinked files are excluded. Files still referenced by another Express entry or recorded as used by Core pages/blocks remain. Eligible files are deleted through Core with all versions and thumbnails. The preview includes distinct eligible files and folder warnings. Use a non-public storage location for confidential uploads; Core supports assigning storage locations per folder. Its usage tracker does not cover every hard-coded URL or custom integration. Delivered emails, mailboxes, web server logs, external analytics and backups remain outside scope. It does delete logged copies of sent mail inside Concrete's database `Logs` table when log retention is enabled. Express objects that are not used by an installed Express Form block remain untouched. The selected periods are technical settings, not legal advice.
+The package keeps File Manager files by default. Version 0.9.3 can delete files linked to an expired Express entry only when directly in the authorized folder; subfolders and unlinked files are excluded. Files still referenced by another Express entry or recorded as used by Core pages/blocks remain. Eligible files are deleted through Core with all versions and thumbnails. The preview includes distinct eligible files and folder warnings. Use a non-public storage location for confidential uploads; Core supports assigning storage locations per folder. Its usage tracker does not cover every hard-coded URL or custom integration. Delivered emails, mailboxes, web server logs, external analytics and backups remain outside scope. It does delete logged copies of sent mail inside Concrete's database `Logs` table when log retention is enabled. Express objects that are not used by an installed Express Form block remain untouched. The selected periods are technical settings, not legal advice.
 
 Support: [GitHub Issues](https://github.com/Xanweb/xw_data_retention/issues). This is a free add-on with no guaranteed response time. Email is not a support channel.
 
-## Features for 1.1.0
+## Features for 0.9.3
 
 - Optional, separately confirmed upload deletion for expired Express Form entries only.
 - Explicit authorization of one non-root File Manager folder; direct files only.
@@ -32,9 +32,9 @@ Support: [GitHub Issues](https://github.com/Xanweb/xw_data_retention/issues). Th
 - Core file deletion includes all versions and thumbnails; file errors are logged and do not stop later entries.
 - Upgrade from 1.0.x preserves retention periods and leaves file deletion disabled.
 
-## Changelog — 1.1.0 (unreleased)
+## Changelog — 0.9.3
 
-Add optional Express upload deletion with folder scoping, reference checks, previews, a separate confirmation and package-channel error logging. Existing retention settings remain unchanged on upgrade. Uploaded files remain untouched until explicitly enabled. See `docs/verification-1.1.0.md` for Core findings, tested versions and limitations. This branch must not be tagged or merged until the publisher approves the release.
+Add optional Express upload deletion with folder scoping, reference checks, previews, a separate confirmation and package-channel error logging. Existing retention settings remain unchanged on upgrade. Uploaded files remain untouched until explicitly enabled. See `docs/verification-0.9.3.md` for combined release verification and `docs/verification-1.1.0.md` for the historical upload-branch findings. The upload and page-version feature branches are combined in release 0.9.3.
 
 ## First PRB post (historical 0.9.0 submission)
 
@@ -56,3 +56,9 @@ The code uses Concrete CMS APIs and Doctrine DBAL already supplied by Core. It i
 One scoped uninstall workaround is intentional: `uninstall()` deletes the package’s rows from the `Config` table directly, because `DatabaseLoader::clearNamespace()` in Concrete 9.3.0 and 9.5.7 builds the DELETE query but never executes it. After Core removes the package's own page, task, and schedule, `uninstall()` deletes only `Config` rows whose namespace is `xw_data_retention`. Fresh-install uninstall tests on both versions confirmed that no package configuration remains and submission data is unaffected.
 
 For any revised PRB upload I will increment the third version digit. The first approved release will be 1.0.0.
+
+## Page versions — 0.9.3
+
+Add independent page-version retention with a configurable 10–1000 minimum, optional creation-age limit, SQL preview and an explicit confirmation. Always protect approved/latest/future-scheduled versions; conservatively skip pages with open workflows. Stacks/global areas require a separate opt-in. Trash, drafts, system pages, aliases and templates are excluded. A native per-page batch task runs independently at 03:40. Warn about a scheduled Core Remove Old Page Versions task and recommend disabling its schedule. Core APIs preserve shared blocks; per-version errors are logged and per-run totals reported.
+
+Package description for this feature: Configurable retention for form submissions, page versions and Concrete CMS database logs. The package name stays Xanweb Data Retention. No release version is assigned by this branch. Feature matrix: Concrete 9.3.9/9.5.7 with PHP 8.2/8.4; see `docs/verification-page-versions.md` for results and workflow protections.

@@ -13,7 +13,7 @@ All **180 upload assertions** passed across four Core/PHP combinations, plus upg
 | 9.5.7 | 8.2.35 | 45 / 45 | 0 | 3 | pass |
 | 9.5.7 | 8.4.27 | 45 / 45 | 0 | 10 | pass |
 
-Diagnostic numbers count repeated occurrences, not unique issues. The three PHP 8.2 occurrences come from Core's dynamic `FileLogger::$filePath` property when native process logging is exercised. PHP 8.4 also reports upstream nullable-signature/E_STRICT and other Core/vendor deprecations. Core files and diagnostic reporting were not modified to obtain passing results. Full output, with local workstation paths redacted, is in [test-results](test-results/); structured results are in [matrix.json](test-results/matrix.json).
+Diagnostic numbers count repeated occurrences, not unique issues. The three PHP 8.2 occurrences come from Core's dynamic `FileLogger::$filePath` property when native process logging is exercised. PHP 8.4 also reports upstream nullable-signature/E_STRICT and other Core/vendor deprecations. Core files and diagnostic reporting were not modified to obtain passing results. Full output, with local workstation paths redacted, is in [test-results](test-results/uploads-history/); structured results are in [matrix.json](test-results/uploads-history/matrix.json).
 
 The 9.3.x target used the official complete **9.3.9** release. The 9.5.7 target used the local, read-only Concrete Core reporting **9.5.7**. Both tests used fresh, disposable installations and separate private MySQL databases, with no TCP database listener. No customer data was involved. The new feature was not rerun on 9.3.0; compatibility statements distinguish the previously tested base behavior from this 9.3.9/9.5.7 feature matrix.
 
@@ -74,7 +74,7 @@ The Dashboard renders the new section and native folder selector on both 9.3.9 a
 
 All **11 PHP files** (including test scripts) linted under PHP 8.2.35 and 8.4.27. Composer JSON, local Markdown links, `git diff --check`, German gettext parsing, source-message coverage and translation placeholders passed. The external PO gained 23 new translations. No `languages/` directory or compiled catalog is included.
 
-The tested payload came from `git archive` of implementation commit `c320ebb13d2e987f1c5d0ca4955948a60a05c973`. Subsequent changes only add verification evidence and correct the lifecycle assertion for Core's persisted boolean representation; the archive payload remains identical. [package-sha256.json](test-results/package-sha256.json) records hashes of all **15** distributable files. `.gitattributes` excludes tests, verification material, translation source, listing-only material and local development tools. The final ZIP is generated from the delivered feature-branch HEAD, and every file is compared against the tested payload. Its `.sha256` companion contains the archive checksum.
+The tested payload came from `git archive` of implementation commit `c320ebb13d2e987f1c5d0ca4955948a60a05c973`. Subsequent changes only add verification evidence and correct the lifecycle assertion for Core's persisted boolean representation; the archive payload remains identical. [package-sha256.json](test-results/uploads-history/package-sha256.json) records hashes of all **15** distributable files. `.gitattributes` excludes tests, verification material, translation source, listing-only material and local development tools. The final ZIP is generated from the delivered feature-branch HEAD, and every file is compared against the tested payload. Its `.sha256` companion contains the archive checksum.
 
 ## Open release tasks
 

@@ -1,6 +1,6 @@
 {
   "name": "xanweb/xw_data_retention",
-  "description": "Configurable retention for Concrete CMS form submissions and database logs.",
+  "description": "Configurable retention for Concrete CMS form submissions, page versions and database logs.",
   "type": "concrete5-package",
   "license": "MIT",
   "require": {

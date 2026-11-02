@@ -10,3 +10,6 @@ __pycache__/
 # Local development utilities
 make_icon.py
 release.py
+
+# Generated release archives
+/dist/

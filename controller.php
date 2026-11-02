@@ -15,7 +15,7 @@ use Xw\DataRetention\TaskController;
 class Controller extends Package
 {
     protected $pkgHandle = 'xw_data_retention';
-    protected $pkgVersion = '0.9.0';
+    protected $pkgVersion = '1.1.0';
     protected $appVersionRequired = '9.3.0';
     protected $pkgAutoloaderRegistries = ['src' => 'Xw\\DataRetention'];
 
@@ -53,6 +53,12 @@ class Controller extends Package
         }
         $page->update(['cName' => t('Data Retention')]);
         return $pkg;
+    }
+
+    public function upgrade()
+    {
+        parent::upgrade();
+        $this->app->make(Policy::class)->initializeUploads();
     }
 
     public function uninstall()

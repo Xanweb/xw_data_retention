@@ -74,15 +74,23 @@ final class Cleanup
                 [$policy->cutoff($settings['logs'])->getTimestamp()]
             );
         }
-        return $result;
+        return array_merge($result, app(Uploads::class)->preview($settings, $this->expressEntityIDs(),
+            $settings['express'] > 0 ? $policy->cutoff($settings['express']) : new \DateTimeImmutable()));
     }
 
     public function run(): array
     {
         $policy = app(Policy::class);
         $settings = $policy->get();
-        $count = ['express' => 0, 'legacy' => 0, 'logs' => 0];
+        $count = ['express' => 0, 'legacy' => 0, 'logs' => 0, 'uploaded_files' => 0];
         $deadline = $this->formDeadline();
+        $uploads = app(Uploads::class);
+        $folderID = (int) $settings['express_upload_folder_id'];
+        $deleteUploads = $settings['express'] > 0 && $settings['delete_express_uploads'];
+        if ($deleteUploads && !$uploads->isAllowedFolder($folderID)) {
+            $uploads->warning(t('The authorized upload folder no longer exists. Uploaded file deletion was skipped; expired entries will still be deleted.'));
+            $deleteUploads = false;
+        }
 
         if ($settings['express'] > 0) {
             $db = $this->database();
@@ -104,7 +112,19 @@ final class Cleanup
                     }
                     $entry = $em->find(Entry::class, (int) $row['exEntryID']);
                     if ($entry && in_array((string) $entry->getEntity()->getID(), $ids, true) && $entry->getDateCreated() < $cutoff) {
+                        $fileIDs = [];
+                        if ($deleteUploads) {
+                            try {
+                                $fileIDs = $uploads->collect($entry);
+                            } catch (\Throwable $error) {
+                                $uploads->warning(t('Could not inspect uploaded files for Express entry %d: %s', $entry->getID(), $error->getMessage()));
+                            }
+                        }
                         $manager->deleteEntry($entry);
+                        // Finish this entry and its files before checking the deadline again.
+                        if ($deleteUploads) {
+                            $count['uploaded_files'] += $uploads->delete($fileIDs, $folderID);
+                        }
                         // Leave the task runner's managed objects attached.
                         if ($em->contains($entry)) {
                             $em->detach($entry);

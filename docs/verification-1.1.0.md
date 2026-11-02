@@ -1,5 +1,8 @@
 # Verification — Express upload retention 1.1.0
 
+> Historical feature-branch verification. Both features are combined in 0.9.3;
+> see [combined release verification](verification-0.9.3.md) for the current version and matrix.
+
 Date: **2026-10-27**. Branch: `feature/delete-form-uploads`. Package version: **1.1.0**. This is an unreleased feature build. No merge, tag, Packagist release or Marketplace submission is part of this delivery.
 
 ## Result

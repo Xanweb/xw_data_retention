@@ -226,7 +226,9 @@ $context = app(ContextFactory::class)->createDashboardContext($runner);
 $handler->start($runner, $context); $handler->run($runner, $context); $handler->complete($runner, $context);
 // The Dashboard queues the process; consume it with the same Symfony Worker as Core.
 $dispatcher = app(Symfony\Component\EventDispatcher\EventDispatcherInterface::class);
-$dispatcher->addSubscriber(new Symfony\Component\Messenger\EventListener\StopWorkerOnMessageLimitListener(1));
+$dispatcher->addListener(Symfony\Component\Messenger\Event\WorkerRunningEvent::class, static function ($event) use ($db, $runner) {
+    if ($db->fetchOne('SELECT dateCompleted FROM MessengerProcesses WHERE id = ?', [$runner->getProcess()->getID()])) { $event->getWorker()->stop(); }
+});
 $dispatcher->addSubscriber(new Symfony\Component\Messenger\EventListener\StopWorkerOnTimeLimitListener(60));
 $receiver = app(Concrete\Core\Messenger\Transport\TransportManager::class)->getReceivers()->get('async');
 $worker = new Symfony\Component\Messenger\Worker(['async' => $receiver], app(Symfony\Component\Messenger\RoutableMessageBus::class), $dispatcher);

@@ -1,0 +1,58 @@
+[
+  {
+    "concrete": "9.3.9",
+    "php": "8.2",
+    "checks": {
+      "combined": 11,
+      "uploads": 45,
+      "page_versions": 76
+    },
+    "total": 132,
+    "package_diagnostics": 0,
+    "upstream_suite_diagnostics": 10,
+    "upstream_lifecycle_diagnostics": 0,
+    "lifecycle": "actual 0.9.0 -> 0.9.3 upgrade, both hooks, uninstall and fresh reinstall passed"
+  },
+  {
+    "concrete": "9.3.9",
+    "php": "8.4",
+    "checks": {
+      "combined": 11,
+      "uploads": 45,
+      "page_versions": 76
+    },
+    "total": 132,
+    "package_diagnostics": 0,
+    "upstream_suite_diagnostics": 297,
+    "upstream_lifecycle_diagnostics": 9,
+    "lifecycle": "actual 0.9.0 -> 0.9.3 upgrade, both hooks, uninstall and fresh reinstall passed"
+  },
+  {
+    "concrete": "9.5.7",
+    "php": "8.2",
+    "checks": {
+      "combined": 11,
+      "uploads": 45,
+      "page_versions": 76
+    },
+    "total": 132,
+    "package_diagnostics": 0,
+    "upstream_suite_diagnostics": 10,
+    "upstream_lifecycle_diagnostics": 0,
+    "lifecycle": "actual 0.9.0 -> 0.9.3 upgrade, both hooks, uninstall and fresh reinstall passed"
+  },
+  {
+    "concrete": "9.5.7",
+    "php": "8.4",
+    "checks": {
+      "combined": 11,
+      "uploads": 45,
+      "page_versions": 76
+    },
+    "total": 132,
+    "package_diagnostics": 0,
+    "upstream_suite_diagnostics": 21,
+    "upstream_lifecycle_diagnostics": 0,
+    "lifecycle": "actual 0.9.0 -> 0.9.3 upgrade, both hooks, uninstall and fresh reinstall passed"
+  }
+]

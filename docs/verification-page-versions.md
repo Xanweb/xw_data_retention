@@ -1,5 +1,8 @@
 # Verification — Page version retention (Unreleased)
 
+> Historical feature-branch verification. Both features are combined in 0.9.3;
+> see [combined release verification](verification-0.9.3.md) for the current version and matrix.
+
 Date: **2026-10-27**. Branch: `feature/page-versions`, based on `main` at `15f3486b963a8088f5a68a124cd307b9d23d2e83`. **Package version remains 0.9.0**, exactly as on that main. No merge, tag, Packagist release or Marketplace submission is included. The sibling upload-retention branch is not part of this build.
 
 ## Result

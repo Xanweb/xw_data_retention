@@ -26,7 +26,7 @@ if ($mode === 'cleanup') {
     return 0;
 }
 if ($mode === 'uninstalled') {
-    $assert(!$package && !$tasks->getByHandle(Policy::TASK_HANDLE) && !$tasks->getByHandle(VersionPolicy::TASK_HANDLE), 'Uninstall removes package and both independent tasks');
+    $assert(!$package && !$tasks->getByHandle('xw_delete_expired_form_data') && !$tasks->getByHandle('xw_delete_old_page_versions'), 'Uninstall removes package and both independent tasks');
     $assert(!(int) $db->fetchOne('SELECT COUNT(*) FROM Config WHERE configNamespace = ?', ['xw_data_retention']), 'Uninstall removes only the package configuration namespace');
     $assert(!$schema->tablesExist(['XwDataRetentionPageVersionRuns']), 'Uninstall removes the owned run-counter table');
     $before = json_decode(file_get_contents(DIR_BASE . '/retention-before-uninstall.json'), true);
@@ -37,7 +37,7 @@ if ($mode === 'uninstalled') {
 if ($mode === 'seed') {
     $assert($package && $package->getPackageVersion() === '0.9.0', 'Upgrade baseline is actual main version 0.9.0');
     app(Policy::class)->save(['express' => '2', 'legacy' => '3', 'logs' => '6']);
-    $assert(!$tasks->getByHandle(VersionPolicy::TASK_HANDLE), 'Baseline has no page-version task');
+    $assert(!$tasks->getByHandle('xw_delete_old_page_versions'), 'Baseline has no page-version task');
     $assert($package->getController()->getConfig()->get('retention.delete_express_uploads') === null, 'Baseline has no uploaded-file deletion option');
     return 0;
 }
@@ -50,9 +50,9 @@ if ($mode === 'prepare-uninstall') {
     ]));
     return 0;
 }
-$formTask = $tasks->getByHandle(Policy::TASK_HANDLE); $versionTask = $tasks->getByHandle(VersionPolicy::TASK_HANDLE);
+$formTask = $tasks->getByHandle('xw_delete_expired_form_data'); $versionTask = $tasks->getByHandle('xw_delete_old_page_versions');
 $assert($formTask && $versionTask, 'Both native tasks are installed');
-$assert((int) $db->fetchOne('SELECT COUNT(*) FROM Tasks WHERE handle IN (?, ?)', [Policy::TASK_HANDLE, VersionPolicy::TASK_HANDLE]) === 2, 'Task handles have no duplicates');
+$assert((int) $db->fetchOne('SELECT COUNT(*) FROM Tasks WHERE handle IN (?, ?)', ['xw_delete_expired_form_data', 'xw_delete_old_page_versions']) === 2, 'Task handles have no duplicates');
 $assert($schema->tablesExist(['XwDataRetentionPageVersionRuns']), 'Page-version run-counter table exists');
 $settings = app(Policy::class)->get();
 $assert(!$settings['delete_express_uploads'] && $settings['express_upload_folder_id'] === 0, 'Express upload deletion starts disabled without an authorized folder');

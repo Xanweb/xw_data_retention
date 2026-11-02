@@ -29,14 +29,13 @@ $assert(!$schedules(Policy::TASK_HANDLE) && count($schedules(VersionPolicy::TASK
 $forms->save($upload); $versions->save(array_replace($version, ['enabled' => '0']));
 $assert(count($schedules(Policy::TASK_HANDLE)) === 1 && !$schedules(VersionPolicy::TASK_HANDLE) && $forms->get()['delete_express_uploads'], 'Disabling page-version cleanup preserves active form/upload cleanup');
 $versions->save($version);
+Concrete\Core\User\User::loginByUserID(USER_SUPER_ID);
 $page = Concrete\Core\Page\Page::getByPath('/dashboard/system/automation/data_retention');
 Concrete\Core\Http\Request::getInstance()->setCurrentPage($page);
-$controller = $page->getPageController(); $controller->view(); $values = $controller->getSets();
+$controller = $page->getPageController(); $controller->on_start(); $controller->view(); $values = $controller->getSets();
 $assert(isset($values['settings']['delete_express_uploads'], $values['pageVersionSettings']['keep'], $values['pageVersionPreview'], $values['coreVersionTaskScheduled']), 'Merged Dashboard controller supplies both feature datasets');
-$render = static function (array $values, $view, $token) {
-    extract($values); ob_start(); require dirname(__DIR__) . '/single_pages/dashboard/system/automation/data_retention.php'; return ob_get_clean();
-};
-$html = $render($values, $controller->getViewObject(), app('token'));
+$view = $controller->getViewObject();
+ob_start(); $html = (string) $view->render() . ob_get_clean();
 $assert(substr_count($html, '<form ') === 2 && strpos($html, 'save_page_versions') !== false, 'Actual Dashboard template renders both independent forms');
 $assert(strpos($html, 'name="express_upload_folder_id"') !== false && strpos($html, 'name="page_versions_keep"') !== false, 'Actual template renders the Core upload folder selector and page-version fields');
 $assert(strpos($html, 'name="confirm_uploads"') !== false && substr_count($html, 'name="confirm_activation"') === 2, 'Each merged form retains its required deletion confirmations');

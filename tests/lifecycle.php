@@ -52,7 +52,7 @@ if ($mode === 'prepare-uninstall') {
 }
 $formTask = $tasks->getByHandle(Policy::TASK_HANDLE); $versionTask = $tasks->getByHandle(VersionPolicy::TASK_HANDLE);
 $assert($formTask && $versionTask, 'Both native tasks are installed');
-$assert((int) $db->fetchOne('SELECT COUNT(*) FROM CommandTasks WHERE handle IN (?, ?)', [Policy::TASK_HANDLE, VersionPolicy::TASK_HANDLE]) === 2, 'Task handles have no duplicates');
+$assert((int) $db->fetchOne('SELECT COUNT(*) FROM Tasks WHERE handle IN (?, ?)', [Policy::TASK_HANDLE, VersionPolicy::TASK_HANDLE]) === 2, 'Task handles have no duplicates');
 $assert($schema->tablesExist(['XwDataRetentionPageVersionRuns']), 'Page-version run-counter table exists');
 $settings = app(Policy::class)->get();
 $assert(!$settings['delete_express_uploads'] && $settings['express_upload_folder_id'] === 0, 'Express upload deletion starts disabled without an authorized folder');

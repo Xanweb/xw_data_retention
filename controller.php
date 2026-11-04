@@ -4,13 +4,12 @@ namespace Concrete\Package\XwDataRetention;
 
 defined('C5_EXECUTE') or die('Access Denied.');
 
-use Concrete\Core\Command\Task\Manager as TaskManager;
 use Concrete\Core\Package\Package;
 use Concrete\Core\Page\Page;
 use Xanweb\Module\Installer;
 use Xanweb\Module\Uninstaller;
+use Xw\DataRetention\Module\Module;
 use Xw\DataRetention\Policy;
-use Xw\DataRetention\TaskController;
 
 class Controller extends Package
 {
@@ -31,13 +30,7 @@ class Controller extends Package
 
     public function on_start()
     {
-        $this->app->make(TaskManager::class)->extend(\Xw\DataRetention\PageVersions\Policy::TASK_HANDLE, static function ($app) {
-            return $app->make(\Xw\DataRetention\PageVersions\TaskController::class);
-        });
-        $this->app->make('director')->addListener('on_close_process', [$this->app->make(\Xw\DataRetention\PageVersions\RunStore::class), 'completed']);
-        $this->app->make(TaskManager::class)->extend(Policy::TASK_HANDLE, static function ($app) {
-            return $app->make(TaskController::class);
-        });
+        Module::boot();
     }
 
     public function install()

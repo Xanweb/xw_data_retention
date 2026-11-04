@@ -5,7 +5,8 @@
   "license": "MIT",
   "require": {
     "php": "^7.3 || ^8.0",
-    "composer/installers": "^1.0 || ^2.0"
+    "composer/installers": "^1.0 || ^2.0",
+    "xanweb/c5-module": "^2.2"
   },
   "support": {
     "issues": "https://github.com/Xanweb/xw_data_retention/issues",

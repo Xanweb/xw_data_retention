@@ -5,10 +5,10 @@ namespace Concrete\Package\XwDataRetention;
 defined('C5_EXECUTE') or die('Access Denied.');
 
 use Concrete\Core\Command\Task\Manager as TaskManager;
-use Concrete\Core\Command\Task\TaskService;
 use Concrete\Core\Package\Package;
 use Concrete\Core\Page\Page;
-use Concrete\Core\Page\Single as SinglePage;
+use Xanweb\Module\Installer;
+use Xanweb\Module\Uninstaller;
 use Xw\DataRetention\Policy;
 use Xw\DataRetention\TaskController;
 
@@ -47,38 +47,25 @@ class Controller extends Package
             throw new \RuntimeException('The dashboard path for data retention already exists.');
         }
         $pkg = parent::install();
-        $tasks = $this->app->make(TaskService::class);
-        if (!$tasks->getByHandle(Policy::TASK_HANDLE)) {
-            $tasks->add(Policy::TASK_HANDLE, $pkg->getPackageEntity());
-        }
-        $this->installPageVersionTask($pkg->getPackageEntity());
-        $page = SinglePage::add('/dashboard/system/automation/data_retention', $pkg);
-        if (!$page || $page->isError()) {
-            throw new \RuntimeException('Could not install the data retention dashboard page.');
-        }
-        $page->update(['cName' => t('Data Retention')]);
+        $installer = new Installer($pkg);
+        $installer->installTasks(Policy::TASK_HANDLE, \Xw\DataRetention\PageVersions\Policy::TASK_HANDLE);
+        $installer->installSinglePage('/dashboard/system/automation/data_retention', t('Data Retention'));
         return $pkg;
-    }
-
-    private function installPageVersionTask($entity): void
-    {
-        $tasks = $this->app->make(TaskService::class);
-        if (!$tasks->getByHandle(\Xw\DataRetention\PageVersions\Policy::TASK_HANDLE)) {
-            $tasks->add(\Xw\DataRetention\PageVersions\Policy::TASK_HANDLE, $entity);
-        }
     }
 
     public function upgrade()
     {
         parent::upgrade();
         $this->app->make(Policy::class)->initializeUploads();
-        $this->installPageVersionTask($this->getPackageEntity());
+        $installer = new Installer($this->getPackageEntity());
+        $installer->installTasks(Policy::TASK_HANDLE, \Xw\DataRetention\PageVersions\Policy::TASK_HANDLE);
+        $installer->installSinglePage('/dashboard/system/automation/data_retention', t('Data Retention'));
     }
 
     public function uninstall()
     {
         parent::uninstall();
-        $this->app->make('database')->connection()->executeStatement('DROP TABLE IF EXISTS XwDataRetentionPageVersionRuns');
+        Uninstaller::dropTables('XwDataRetentionPageVersionRuns');
         // In Core 9.3.0 and 9.5.7, DatabaseLoader::clearNamespace() builds but
         // does not execute its DELETE query. Remove only this package's rows.
         $this->app->make('database')->connection()->delete('Config', [

@@ -4,7 +4,9 @@ defined('C5_EXECUTE') or die('Access Denied.');
 /** @var array $choices */
 /** @var array $preview */
 /** @var bool $schedulerEnabled */
+/** @var string $activeTab 'retention' or 'page-versions' */
 $labels = \Xw\DataRetention\Policy::labels();
+$activeTab = isset($activeTab) ? $activeTab : 'retention';
 ?>
 <div class="ccm-dashboard-header-buttons">
     <a class="btn btn-secondary" href="<?= h((string) \Concrete\Core\Support\Facade\Url::to('/dashboard/system/automation/tasks')) ?>"><?= t('View tasks') ?></a>
@@ -14,6 +16,21 @@ $labels = \Xw\DataRetention\Policy::labels();
 <?php if (!$schedulerEnabled): ?>
 <div class="alert alert-warning" role="status"><?= t('The Concrete CMS scheduler is currently disabled. Saved retention periods do not run automatically until the scheduler is enabled under Dashboard → System & Settings → Automation.') ?></div>
 <?php endif ?>
+<?php
+$tabs = [
+    'retention' => t('Data Retention'),
+    'page-versions' => t('Page versions'),
+];
+?>
+<ul class="nav nav-tabs mb-4" role="tablist">
+    <?php foreach ($tabs as $tabHandle => $tabLabel): ?>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link<?= $activeTab === $tabHandle ? ' active' : '' ?>" id="data-retention-tab-<?= $tabHandle ?>" href="<?= h((string) $view->action('view', $tabHandle)) ?>" data-bs-toggle="tab" data-bs-target="#data-retention-pane-<?= $tabHandle ?>" role="tab" aria-controls="data-retention-pane-<?= $tabHandle ?>" aria-selected="<?= $activeTab === $tabHandle ? 'true' : 'false' ?>"<?= $activeTab === $tabHandle ? '' : ' tabindex="-1"' ?>><?= h($tabLabel) ?></a>
+    </li>
+    <?php endforeach ?>
+</ul>
+<div class="tab-content">
+<div class="tab-pane fade<?= $activeTab === 'retention' ? ' show active' : '' ?>" id="data-retention-pane-retention" role="tabpanel" aria-labelledby="data-retention-tab-retention" tabindex="0">
 <form method="post" action="<?= $view->action('save') ?>">
     <?php $token->output('save_data_retention') ?>
     <?php foreach ($labels as $source => $label): ?>
@@ -62,10 +79,14 @@ $labels = \Xw\DataRetention\Policy::labels();
     </div>
     <button class="btn btn-primary" type="submit"><?= t('Save settings') ?></button>
 </form>
-<?php $view->element('page_versions/settings', compact('pageVersionSettings', 'pageVersionPreview', 'coreVersionTaskScheduled', 'view', 'token'), 'xw_data_retention'); ?>
 <p class="form-text"><?= t('Form submissions are processed in batches until complete or the task time limit is reached. Database logs are processed in batches until complete.') ?></p>
 <hr>
 <p><?= t('These periods apply only to stored Express Form block submissions, legacy Form block submissions, and optional Concrete CMS database logs. File Manager uploads are kept by default; optional deletion applies only to files of expired Express entries directly in the authorized folder, subject to the reference checks above. Delivered emails, web server logs, and backups need separate retention rules.') ?></p>
+</div>
+<div class="tab-pane fade<?= $activeTab === 'page-versions' ? ' show active' : '' ?>" id="data-retention-pane-page-versions" role="tabpanel" aria-labelledby="data-retention-tab-page-versions" tabindex="0">
+<?php $view->element('page_versions/settings', compact('pageVersionSettings', 'pageVersionPreview', 'coreVersionTaskScheduled', 'view', 'token'), 'xw_data_retention'); ?>
+</div>
+</div>
 
 <script>
 $(function () {

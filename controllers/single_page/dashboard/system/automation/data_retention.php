@@ -11,8 +11,11 @@ use Xw\DataRetention\Policy;
 
 class DataRetention extends DashboardPageController
 {
-    public function view(): void
+    private const TABS = ['retention', 'page-versions'];
+
+    public function view(string $tab = ''): void
     {
+        $this->set('activeTab', in_array($tab, self::TABS, true) ? $tab : 'retention');
         $settings = $this->app->make(Policy::class)->get();
         $this->set('settings', $settings);
         $this->set('choices', Policy::MONTHS);
@@ -29,7 +32,8 @@ class DataRetention extends DashboardPageController
     {
         if (!$this->token->validate('save_page_version_retention')) {
             $this->error->add($this->token->getErrorMessage());
-            return $this->view();
+            $this->view('page-versions');
+            return;
         }
         try {
             $this->app->make(\Xw\DataRetention\PageVersions\Policy::class)->save([
@@ -40,10 +44,10 @@ class DataRetention extends DashboardPageController
                 'confirm_activation' => $this->request->request->get('confirm_activation'),
             ]);
             $this->flash('success', t('Page version retention settings saved.'));
-            return $this->buildRedirect($this->action('view'));
+            return $this->buildRedirect($this->action('view', 'page-versions'));
         } catch (\InvalidArgumentException $error) {
             $this->error->add($error->getMessage());
-            $this->view();
+            $this->view('page-versions');
         }
     }
 

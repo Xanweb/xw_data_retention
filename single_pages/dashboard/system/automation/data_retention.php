@@ -6,7 +6,6 @@ defined('C5_EXECUTE') or die('Access Denied.');
 /** @var bool $schedulerEnabled */
 /** @var string $activeTab 'retention' or 'page-versions' */
 $labels = \Xw\DataRetention\Policy::labels();
-$activeTab = isset($activeTab) ? $activeTab : 'retention';
 ?>
 <div class="ccm-dashboard-header-buttons">
     <a class="btn btn-secondary" href="<?= h((string) \Concrete\Core\Support\Facade\Url::to('/dashboard/system/automation/tasks')) ?>"><?= t('View tasks') ?></a>
@@ -23,9 +22,9 @@ $tabs = [
 ];
 ?>
 <ul class="nav nav-tabs mb-4" role="tablist">
-    <?php foreach ($tabs as $tabHandle => $tabLabel): ?>
+    <?php foreach ($tabs as $tabHandle => $tabLabel): $isActive = $activeTab === $tabHandle; ?>
     <li class="nav-item" role="presentation">
-        <a class="nav-link<?= $activeTab === $tabHandle ? ' active' : '' ?>" id="data-retention-tab-<?= $tabHandle ?>" href="<?= h((string) $view->action('view', $tabHandle)) ?>" data-bs-toggle="tab" data-bs-target="#data-retention-pane-<?= $tabHandle ?>" role="tab" aria-controls="data-retention-pane-<?= $tabHandle ?>" aria-selected="<?= $activeTab === $tabHandle ? 'true' : 'false' ?>"<?= $activeTab === $tabHandle ? '' : ' tabindex="-1"' ?>><?= h($tabLabel) ?></a>
+        <a class="nav-link<?= $isActive ? ' active' : '' ?>" id="data-retention-tab-<?= $tabHandle ?>" href="<?= h((string) $view->action('view', $tabHandle)) ?>" data-bs-toggle="tab" data-bs-target="#data-retention-pane-<?= $tabHandle ?>" role="tab" aria-controls="data-retention-pane-<?= $tabHandle ?>" aria-selected="<?= $isActive ? 'true' : 'false' ?>"<?= $isActive ? '' : ' tabindex="-1"' ?>><?= h($tabLabel) ?></a>
     </li>
     <?php endforeach ?>
 </ul>

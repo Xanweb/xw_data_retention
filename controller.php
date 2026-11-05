@@ -9,10 +9,13 @@ use Concrete\Core\Page\Page;
 use Xanweb\Module\Installer;
 use Xanweb\Module\Uninstaller;
 use Xw\DataRetention\Module\Module;
+use Xw\DataRetention\PageVersions\Policy as PageVersionsPolicy;
 use Xw\DataRetention\Policy;
 
 class Controller extends Package
 {
+    private const DASHBOARD_PATH = '/dashboard/system/automation/data_retention';
+
     protected $pkgHandle = 'xw_data_retention';
     protected $pkgVersion = '0.9.3';
     protected $appVersionRequired = '9.3.0';
@@ -35,14 +38,12 @@ class Controller extends Package
 
     public function install()
     {
-        $page = Page::getByPath('/dashboard/system/automation/data_retention');
+        $page = Page::getByPath(self::DASHBOARD_PATH);
         if ($page && !$page->isError()) {
             throw new \RuntimeException('The dashboard path for data retention already exists.');
         }
         $pkg = parent::install();
-        $installer = new Installer($pkg);
-        $installer->installTasks(Policy::TASK_HANDLE, \Xw\DataRetention\PageVersions\Policy::TASK_HANDLE);
-        $installer->installSinglePage('/dashboard/system/automation/data_retention', t('Data Retention'));
+        $this->installContent($pkg);
         return $pkg;
     }
 
@@ -50,9 +51,14 @@ class Controller extends Package
     {
         parent::upgrade();
         $this->app->make(Policy::class)->initializeUploads();
-        $installer = new Installer($this->getPackageEntity());
-        $installer->installTasks(Policy::TASK_HANDLE, \Xw\DataRetention\PageVersions\Policy::TASK_HANDLE);
-        $installer->installSinglePage('/dashboard/system/automation/data_retention', t('Data Retention'));
+        $this->installContent($this->getPackageEntity());
+    }
+
+    private function installContent($pkg): void
+    {
+        $installer = new Installer($pkg);
+        $installer->installTasks(Policy::TASK_HANDLE, PageVersionsPolicy::TASK_HANDLE);
+        $installer->installSinglePage(self::DASHBOARD_PATH, t('Data Retention'));
     }
 
     public function uninstall()

@@ -3,6 +3,7 @@
 namespace Xw\DataRetention\Module;
 
 use Xanweb\Module\Module as AbstractModule;
+use Xw\DataRetention\PageVersions\RunStore;
 use Xw\DataRetention\Service\Provider as ServiceProvider;
 
 class Module extends AbstractModule
@@ -26,6 +27,18 @@ class Module extends AbstractModule
     {
         return [
             ServiceProvider::class,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @see AbstractModule::getEventSubscribers()
+     */
+    protected static function getEventSubscribers(): array
+    {
+        return [
+            RunStore::class,
         ];
     }
 }

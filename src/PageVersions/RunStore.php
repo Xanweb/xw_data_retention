@@ -5,10 +5,16 @@ defined('C5_EXECUTE') or die('Access Denied.');
 
 use Concrete\Core\Command\Process\Event\ProcessEvent;
 use Concrete\Core\Command\Process\Logger\LoggerFactoryInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /** Atomic counters shared by the batch's potentially concurrent workers. */
-final class RunStore
+final class RunStore implements EventSubscriberInterface
 {
+    public static function getSubscribedEvents(): array
+    {
+        return ['on_close_process' => 'completed'];
+    }
+
     private function database() { return app('database')->connection(); }
 
     public function create(): string

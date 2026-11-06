@@ -17,7 +17,6 @@ class DataRetention extends DashboardPageController
         $this->set('settings', $settings);
         $this->set('choices', Policy::MONTHS);
         $this->set('preview', $this->app->make(Cleanup::class)->preview($settings));
-        $this->requireAsset('core/file-manager');
         $versionPolicy = $this->app->make(\Xw\DataRetention\PageVersions\Policy::class);
         $this->set('pageVersionSettings', $versionPolicy->get());
         $this->set('pageVersionPreview', $this->app->make(\Xw\DataRetention\PageVersions\Candidates::class)->preview());

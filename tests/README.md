@@ -1,4 +1,4 @@
-# Combined release tests — 0.9.3
+# Combined release tests
 
 Use only disposable Concrete sites named **Xanweb Retention Release Test** with
 MySQL databases **xw_retention_release093_93** or **xw_retention_release093_95**.
@@ -14,16 +14,17 @@ the package**; preserve upstream Core/vendor diagnostics separately.
 For each matrix cell:
 
 1. Install original main 0.9.0; run `lifecycle.php seed` to save 2/3/6-month periods.
-2. Replace it with the 0.9.3 archive and run `c5:package:update xw_data_retention`.
+2. Replace it with the current release archive and run `c5:package:update xw_data_retention`.
 3. Run `lifecycle.php upgraded`; it checks both new hooks and disables the old
    periods only after verifying that upgrade preserved them.
 4. Run `combined.php`, `uploads.php`, `lifecycle.php cleanup`, then
    `page_versions.php`. The combined test checks both policy namespaces,
-   independent schedules, Dashboard datasets, real forms and confirmations.
+   independent schedules, Dashboard datasets, real forms and confirmations. It
+   also checks that the Dashboard adds no invalid asset group notice to the Core log.
 5. Run `lifecycle.php prepare-uninstall`, uninstall the package, then run
    `lifecycle.php uninstalled`. This verifies owned tasks, config and table
    removal while preserving unrelated config and page histories.
-6. Reinstall 0.9.3 and run `lifecycle.php defaults`.
+6. Reinstall the current release and run `lifecycle.php defaults`.
 
 Invoke test scripts from each test site's root using:
 

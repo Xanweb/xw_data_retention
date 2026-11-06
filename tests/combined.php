@@ -32,12 +32,16 @@ $versions->save($version);
 Concrete\Core\User\User::loginByUserID(USER_SUPER_ID);
 $page = Concrete\Core\Page\Page::getByPath('/dashboard/system/automation/data_retention');
 Concrete\Core\Http\Request::getInstance()->setCurrentPage($page);
+$assetNotice = '%ResponseAssetGroup::requireAsset%not a valid asset group handle%';
+$assetNoticesBefore = (int) $db->fetchOne('SELECT COUNT(*) FROM Logs WHERE message LIKE ?', [$assetNotice]);
 $controller = $page->getPageController(); $controller->on_start(); $controller->view(); $values = $controller->getSets();
 $assert(isset($values['settings']['delete_express_uploads'], $values['pageVersionSettings']['keep'], $values['pageVersionPreview'], $values['coreVersionTaskScheduled']), 'Merged Dashboard controller supplies both feature datasets');
 $view = $controller->getViewObject();
 ob_start(); $html = (string) $view->render() . ob_get_clean();
 $assert(substr_count($html, '<form ') === 2 && strpos($html, 'save_page_versions') !== false, 'Actual Dashboard template renders both independent forms');
 $assert(strpos($html, 'name="express_upload_folder_id"') !== false && strpos($html, 'name="page_versions_keep"') !== false, 'Actual template renders the Core upload folder selector and page-version fields');
+$assert((int) $db->fetchOne('SELECT COUNT(*) FROM Logs WHERE message LIKE ?', [$assetNotice]) === $assetNoticesBefore,
+    'The Data Retention dashboard adds no invalid asset group notice to the Core log');
 $assert(strpos($html, 'name="confirm_uploads"') !== false && substr_count($html, 'name="confirm_activation"') === 2, 'Each merged form retains its required deletion confirmations');
 $forms->save(['express' => '0', 'legacy' => '0', 'logs' => '0']);
 $versions->save(array_replace($version, ['enabled' => '0', 'keep' => '10', 'months' => '0', 'include_stacks' => '0']));

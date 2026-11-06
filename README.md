@@ -1,6 +1,6 @@
 # Xanweb Data Retention
 
-Version **0.9.3** combines optional Express upload deletion and independent page-version retention.
+Version **0.9.4** fixes an asset group notice when opening the Data Retention dashboard. Optional Express upload deletion and independent page-version retention were introduced in 0.9.3.
 
 Set separate retention periods for stored Concrete CMS form submissions and, optionally, database logs. This add-on preserves published page content and does not change the Concrete CMS core.
 

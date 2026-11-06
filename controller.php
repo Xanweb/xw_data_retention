@@ -15,7 +15,7 @@ use Xw\DataRetention\TaskController;
 class Controller extends Package
 {
     protected $pkgHandle = 'xw_data_retention';
-    protected $pkgVersion = '0.9.3';
+    protected $pkgVersion = '0.9.4';
     protected $appVersionRequired = '9.3.0';
     protected $pkgAutoloaderRegistries = ['src' => 'Xw\\DataRetention'];
 

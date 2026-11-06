@@ -41,7 +41,7 @@ if ($mode === 'seed') {
     $assert($package->getController()->getConfig()->get('retention.delete_express_uploads') === null, 'Baseline has no uploaded-file deletion option');
     return 0;
 }
-$assert($package && $package->getPackageVersion() === '0.9.3', 'Installed package version is 0.9.3');
+$assert($package && $package->getPackageVersion() === '0.9.4', 'Installed package version is 0.9.4');
 if ($mode === 'prepare-uninstall') {
     file_put_contents(DIR_BASE . '/retention-before-uninstall.json', json_encode([
         'package_id' => $package->getPackageID(),

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.4 — 2026-11-06
+
+- Fix the invalid asset group notice on the Data Retention dashboard. The upload folder selector uses the tree assets already provided by the Concrete CMS dashboard.
+
 ## 0.9.3 — 2026-11-02
 
 - Add optional deletion of uploads attached through file attributes to expiring Express Form entries, restricted to direct files in an explicitly authorized non-root folder.

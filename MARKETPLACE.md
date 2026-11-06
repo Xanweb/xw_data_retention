@@ -3,7 +3,7 @@
 **Package handle:** `xw_data_retention`
 **First PRB upload:** `0.9.0`
 **Minimum Concrete CMS version:** 9.3.0
-**Current package version:** `0.9.3`
+**Current package version:** `0.9.4`
 **Upload feature tested versions:** 9.3.9 and 9.5.7; original retention also tested on 9.3.0
 **License:** MIT (free add-on)
 
@@ -31,6 +31,10 @@ Support: [GitHub Issues](https://github.com/Xanweb/xw_data_retention/issues). Th
 - Distinct file preview, unlinked-file warning and missing-folder handling.
 - Core file deletion includes all versions and thumbnails; file errors are logged and do not stop later entries.
 - Upgrade from 1.0.x preserves retention periods and leaves file deletion disabled.
+
+## Changelog — 0.9.4
+
+Fixed a Core log notice when opening the Data Retention dashboard. The upload folder selector uses the tree assets supplied by the dashboard.
 
 ## Changelog — 0.9.3
 

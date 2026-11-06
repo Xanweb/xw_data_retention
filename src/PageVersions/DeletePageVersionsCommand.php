@@ -7,5 +7,16 @@ final class DeletePageVersionsCommand extends \Concrete\Core\Foundation\Command\
 {
     public $pageID;
     public $runID;
-    public function __construct(int $pageID, string $runID) { $this->pageID = $pageID; $this->runID = $runID; }
+    /** @var int[] Versions handled by this job; empty means every eligible version of the page (pre-chunking messages). */
+    public $versionIDs;
+    /** @var bool Only the first chunk of a page adds to the processed-pages counter. */
+    public $countPage;
+
+    public function __construct(int $pageID, string $runID, array $versionIDs = [], bool $countPage = true)
+    {
+        $this->pageID = $pageID;
+        $this->runID = $runID;
+        $this->versionIDs = array_map('intval', $versionIDs);
+        $this->countPage = $countPage;
+    }
 }

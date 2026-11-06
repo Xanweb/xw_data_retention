@@ -56,9 +56,9 @@ The dashboard warns whenever the Core task has a schedule and links to Tasks. Do
 
 ## Execution and totals
 
-The separate native task is **xw_delete_old_page_versions**, scheduled daily at **03:40** only while enabled. It is also manually runnable. The batch enumerates candidate page IDs and queues one command per page. A page fetches at most **100 version IDs** at once, advances by ID even on a failure, and reloads the current settings/guards immediately before each deletion. Only **Core Version::delete()** deletes versions; there is no package SQL deleting CollectionVersions or shared blocks.
+The separate native task is **xw_delete_old_page_versions**, scheduled daily at **03:40** only while enabled. It is also manually runnable. The batch enumerates candidate page IDs and queues each page's eligible version IDs in commands of at most 10 versions (`TaskController::VERSIONS_PER_JOB`); only the first chunk of a page counts it as processed. Enumeration fetches at most **100 version IDs** at once, advances by ID even on a failure, and reloads the current settings/guards immediately before each deletion. Only **Core Version::delete()** deletes versions; there is no package SQL deleting CollectionVersions or shared blocks.
 
-A scoped request-cache pause prevents Core's legacy page/version/block request cache from growing with every deleted version. The prior cache state is restored for direct calls; Core's worker remains cache-disabled when it was already disabled. Page-specific cached entries are invalidated afterward. No EntityManager clear is used, and the native process/task remain managed by Doctrine. The 225-version test crosses three ID chunks and verifies less than 32 MiB growth during cleanup; it is not a million-version benchmark.
+The request cache stays enabled while a version is deleted, because Core's `Block::getByID()`/`Area::get()` otherwise reload every area of the page for each block (measured ~1.9 s per block on a 265-area page versus ~0.02 s cached). It is flushed before and after each version so it cannot grow with deleted versions. The prior cache state is restored afterward; Core's worker remains cache-disabled when it was already disabled. Page-specific cached entries are invalidated afterward. No EntityManager clear is used, and the native process/task remain managed by Doctrine. The 225-version test crosses three ID chunks and verifies less than 32 MiB growth during cleanup; it is not a million-version benchmark.
 
 Version failures are logged on **xw_data_retention** and processing continues. If an event throws after Core already deleted a version, the count reflects the actual removed row. Tests inject such an event failure and verify continuation and logging.
 
@@ -83,6 +83,6 @@ To reduce conflicts with `feature/delete-form-uploads`, this feature lives in `s
 - Review the conservative **whole-page skip for an open workflow**. It is safe for approval versions but deliberately retains more history until that workflow closes.
 - Select the eventual release version and merge the sibling features, then repeat the acceptance tests on that combined release. This branch is tested independently.
 - Publish translations through translate.concretecms.org before expecting the new German strings in Dashboard language updates.
-- Very large production histories were not benchmarked beyond the 225-version fixture; the runtime uses bounded 100-ID reads and avoids accumulating request-cache entries.
+- Very large production histories were not benchmarked beyond the 225-version fixture; the runtime uses bounded 100-ID reads, 10-version jobs and a per-version request-cache flush.
 
 No failing checks or unresolved implementation blockers remain in the tested scope. No tag, main merge or Marketplace submission has been made.

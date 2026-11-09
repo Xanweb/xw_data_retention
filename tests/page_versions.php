@@ -173,9 +173,13 @@ app('config')->set('concrete.processes.logging.method', 'file');
 $logDirectory = DIR_FILES_UPLOADED_STANDARD . '/page-version-process-logs/'; if (!is_dir($logDirectory)) { mkdir($logDirectory, 0777, true); }
 app('config')->set('concrete.processes.logging.file.directory', $logDirectory);
 $runner = $task->getController()->getTaskRunner($task, new Input());
-$assert($runner instanceof Concrete\Core\Command\Task\Runner\BatchProcessTaskRunner, 'Native batch runner queues one command per affected page');
+$assert($runner instanceof Concrete\Core\Command\Task\Runner\BatchProcessTaskRunner, 'Native batch runner queues version-chunk commands per affected page');
 $messages = iterator_to_array((function () use ($runner) { foreach ($runner->getBatch()->getMessages() as $message) { yield $message; } })());
-$assert(count($messages) === 2 && count(array_unique(array_map(static function ($message) { return $message->pageID; }, $messages))) === 2, 'Batch contains exactly one command for each of the two affected pages');
+$chunkSize = Xw\DataRetention\PageVersions\TaskController::VERSIONS_PER_JOB;
+$assert(count(array_unique(array_map(static function ($message) { return $message->pageID; }, $messages))) === 2, 'Batch only contains commands for the two affected pages');
+$assert(count($messages) === 2 * (int) ceil(15 / $chunkSize) && !array_filter($messages, static function ($message) use ($chunkSize) { return !$message->versionIDs || count($message->versionIDs) > $chunkSize; }), 'Each page is split into bounded version chunks so no job can exceed a worker request');
+$assert(count(array_filter($messages, static function ($message) { return $message->countPage; })) === 2, 'Exactly one chunk per page counts the page as processed');
+$assert(count(array_unique(array_merge(...array_map(static function ($message) { return $message->versionIDs; }, $messages)))) === 30, 'Chunks cover every eligible version exactly once');
 $runner->getBatch()->setMessages($messages);
 $handler = app($runner->getTaskRunnerHandler()); $handler->boot($runner);
 $context = app(ContextFactory::class)->createDashboardContext($runner);

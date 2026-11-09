@@ -11,7 +11,8 @@ final class DeletePageVersionsCommandHandler implements OutputAwareInterface
     use OutputAwareTrait;
     public function __invoke(DeletePageVersionsCommand $command): void
     {
-        $count = app(Cleanup::class)->page($command->pageID);
+        $count = app(Cleanup::class)->page($command->pageID, $command->versionIDs ?: null);
+        if (!$command->countPage) { $count['pages'] = 0; }
         app(RunStore::class)->add($command->runID, $count);
         if ($this->output) {
             $this->output->write(t('Page %d: deleted %d old versions.', $command->pageID, $count['versions']));

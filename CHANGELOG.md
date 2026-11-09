@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Fix page version runs that never completed: a page with hundreds of large versions was handled in one queued job, and with the request cache disabled each block deletion reloaded all page areas, so the job hit PHP's `max_execution_time` and was never acknowledged. Jobs now contain at most 10 versions and the request cache stays enabled (flushed per version) during deletion.
+
 ## 0.9.4 — 2026-11-06
 
 - Fix the invalid asset group notice on the Data Retention dashboard. The upload folder selector uses the tree assets already provided by the Concrete CMS dashboard.
